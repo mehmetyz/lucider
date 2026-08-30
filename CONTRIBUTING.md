@@ -48,10 +48,14 @@ git push origin v0.0.2
 
 **UI:** Releases → Draft a new release → choose tag → **Generate release notes**. Categories come from `.github/release.yml` on the default branch.
 
-1. npmjs.com → Access Tokens → granular **Automation** token with read/write on `lucider`.
-2. GitHub repo → Settings → Secrets and variables → Actions → **`NPM_TOKEN`**.
+npm publish uses GitHub OIDC (Trusted Publisher on `lucider`). No `NPM_TOKEN`, no `--otp`.
 
-Do not commit tokens. Use an automation token (no `--otp` in CI).
+Do not `npm publish` from a laptop with 2FA unless you pass `--otp`.
+
+CI also runs `pnpm audit --prod` and `pnpm check:pack` so the tarball cannot
+include `src/`, tests, specs, or secrets. Actions are pinned to commit SHAs.
+
+Do not commit tokens.
 
 ## License
 
