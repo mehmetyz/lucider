@@ -62,7 +62,7 @@
       "required": ["type", "from", "to"],
       "additionalProperties": false,
       "properties": {
-        "type": { "enum": ["contains", "references", "calls"] },
+        "type": { "enum": ["contains", "references", "calls", "depends"] },
         "from": { "type": "string" },
         "to": { "type": "string" }
       }

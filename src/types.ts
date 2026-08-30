@@ -40,7 +40,7 @@ export interface AnnotatedNode {
   directives: Directive[];
 }
 
-export type EdgeType = "contains" | "references" | "calls";
+export type EdgeType = "contains" | "references" | "calls" | "depends";
 
 export interface Edge {
   type: EdgeType;
@@ -55,7 +55,8 @@ export type WarningCode =
   | "unknown_key"
   | "deprecated_key"
   | "parse_skipped"
-  | "stale_context";
+  | "stale_context"
+  | "unresolved_dep";
 
 export interface Warning {
   code: WarningCode;

@@ -9,7 +9,7 @@ import { applyContext, type BodyDefault } from "./context.js";
 import { computeFingerprint, resolveStaleness } from "./staleness.js";
 import { computeMetrics, type EmittedContext } from "./metrics.js";
 import { assembleArtifact } from "../output/artifact.js";
-import { buildContainmentEdges } from "./graph.js";
+import { buildContainmentEdges, buildDependsEdges } from "./graph.js";
 
 export interface SourceEntry {
   file: string;
@@ -89,7 +89,9 @@ export function buildArtifact(args: BuildArtifactArgs): ContextArtifact {
 
   const rawSource = args.entries.map((e) => e.source).join("\n");
   const metrics = computeMetrics(rawSource, emitted);
-  const edges: Edge[] = buildContainmentEdges(nodes);
+  const containment = buildContainmentEdges(nodes);
+  const depends = buildDependsEdges(nodes, warnings);
+  const edges: Edge[] = [...containment, ...depends];
 
   return assembleArtifact({
     generatedFrom: args.generatedFrom,

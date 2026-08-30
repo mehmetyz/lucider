@@ -79,3 +79,35 @@ export function renderMarkdown(artifact: ContextArtifact): string {
 
   return out.join("\n");
 }
+
+/**
+ * Compact follow-up chunk for dynamic context: only the selected symbols.
+ */
+export function renderChunk(
+  generatedFrom: string,
+  query: string,
+  nodes: AnnotatedNode[],
+  depth: number,
+): string {
+  const out: string[] = [];
+  out.push(`# Lucider chunk — ${query || generatedFrom}`);
+  out.push("");
+  out.push(`${nodes.length} symbol(s) · depth ${depth}. Ask a follow-up to expand.`);
+  out.push("");
+  const byFile = new Map<string, AnnotatedNode[]>();
+  for (const node of nodes) {
+    const list = byFile.get(node.location.file) ?? [];
+    list.push(node);
+    byFile.set(node.location.file, list);
+  }
+  for (const file of [...byFile.keys()].sort()) {
+    out.push(`## ${file}`);
+    out.push("");
+    for (const node of byFile.get(file)!) out.push(renderNode(node));
+  }
+  if (nodes.length === 0) {
+    out.push("_No matching symbols._");
+    out.push("");
+  }
+  return out.join("\n");
+}

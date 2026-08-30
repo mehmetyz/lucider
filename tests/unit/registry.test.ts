@@ -7,6 +7,9 @@ describe("registry", () => {
     expect(r.isKnown("context")).toBe(true);
     expect(r.isKnown("body")).toBe(true);
     expect(r.isKnown("ignore")).toBe(true);
+    expect(r.isKnown("deps")).toBe(true);
+    expect(r.isKnown("ignore")).toBe(true);
+    expect(r.isKnown("deps")).toBe(true);
   });
 
   it("reports unknown keys", () => {

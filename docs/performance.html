@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Performance — Lucider</title>
+    <meta
+      name="description"
+      content="Lucider query packs vs raw source and a repo-map baseline. Same agent quality, fewer tokens."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <header class="site-header">
+        <a class="wordmark" href="index.html">lucider<span>.</span></a>
+        <nav>
+          <a href="index.html">Home</a>
+          <a href="index.html#performance" aria-current="page">Performance</a>
+          <a href="https://www.npmjs.com/package/lucider">npm</a>
+          <a href="https://github.com/mehmetyz/lucider">GitHub</a>
+        </nav>
+      </header>
+
+      <article>
+        <p class="kicker">Frozen run · 2026-08-30</p>
+        <h1>Performance analysis</h1>
+        <p class="meta">
+          Tokenizer <code>cl100k_base</code> · isolated Cursor agents · Aider 0.86.2 as a
+          repo-map baseline only.
+          Canonical markdown: <a href="performance.md">performance.md</a>
+        </p>
+
+        <p>
+          On three coding tasks, <strong>correctness was tied</strong>. Every arm hit the full
+          rubric. Lucider query packs were about <strong>3× smaller</strong> than Aider
+          chat+map and <strong>30–100× smaller</strong> than concatenating the corpus.
+        </p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Task</th>
+              <th class="num">Raw</th>
+              <th class="num">Aider</th>
+              <th class="num">Lucider pack</th>
+              <th class="num">Quality</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="win">
+              <td>Zod <code>parseWithDefault</code></td>
+              <td class="num">145 633</td>
+              <td class="num">4 399</td>
+              <td class="num">1 406</td>
+              <td class="num">13/13</td>
+            </tr>
+            <tr class="win">
+              <td>Zod <code>listConstraints</code></td>
+              <td class="num">145 941</td>
+              <td class="num">13 183</td>
+              <td class="num">4 520</td>
+              <td class="num">16/16</td>
+            </tr>
+            <tr class="win">
+              <td>Hono pipeline</td>
+              <td class="num">153 215</td>
+              <td class="num">7 124</td>
+              <td class="num">2 156</td>
+              <td class="num">16/16</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2>Do not dump the index</h2>
+        <p>
+          The catalog belongs on disk. Pasting a full Lucider index into the model loses to a
+          small repo map on unlabeled trees:
+        </p>
+        <table>
+          <thead>
+            <tr>
+              <th>Corpus</th>
+              <th class="num">Raw</th>
+              <th class="num">Aider map</th>
+              <th class="num">Lucider body-off</th>
+              <th class="num">Lucider body-on</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Shop (annotated)</td>
+              <td class="num">613</td>
+              <td class="num">603</td>
+              <td class="num">300</td>
+              <td class="num">901</td>
+            </tr>
+            <tr>
+              <td>Zod v4/core (unlabeled)</td>
+              <td class="num">145 259</td>
+              <td class="num">2 138</td>
+              <td class="num">37 086</td>
+              <td class="num">138 762</td>
+            </tr>
+            <tr>
+              <td>Lucider <code>src/</code></td>
+              <td class="num">11 151</td>
+              <td class="num">2 032</td>
+              <td class="num">2 147</td>
+              <td class="num">11 960</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>
+          <code>--default-body on</code> is right for a <em>query slice</em>. It is wrong for
+          “paste the whole digest.” Use
+          <code>lucider src --query login --depth 1</code>.
+        </p>
+
+        <h2>Method</h2>
+        <p>
+          Each agent received one context file. Same hidden rubric. Raw = concatenated
+          production sources. Aider = focus files plus
+          <code>--show-repo-map --map-tokens 1024</code>. Lucider = annotated index slices plus
+          <code>--query</code> / <code>--depth</code> — never the full unlabeled graph.
+        </p>
+        <p>
+          Corpora: Zod <code>@93f3ab3</code> v4/core (21 files); Hono <code>@e2740d5</code>
+          production <code>src/</code> (123 files).
+        </p>
+
+        <h2>Limitations</h2>
+        <ul>
+          <li>
+            Parsers see function, class, method, interface, type, enum — not
+            <code>export const</code> (Zod <code>safeParse</code>, Hono <code>compose</code>).
+            Authored text on a nearby type covers the gap today.
+          </li>
+          <li>Query ranking is substring <code>includes</code>; inspect the pack.</li>
+          <li>Best packs need <code>ai-context</code>, <code>ai-ignore</code>, <code>ai-deps</code>.</li>
+          <li>One agent family, three tasks, two libraries — token ratio at matched quality, not a leaderboard.</li>
+        </ul>
+
+        <p>
+          Full write-up with per-task notes:
+          <a href="performance.md">docs/performance.md</a>.
+        </p>
+      </article>
+
+      <footer class="site-footer">
+        <span>MIT · Mehmet Yildiz · <a href="https://www.npmjs.com/package/lucider">npm</a></span>
+        <span><a href="index.html">← Home</a></span>
+      </footer>
+    </div>
+  </body>
+</html>
