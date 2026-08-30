@@ -18,4 +18,12 @@ export class WarningCollector {
       return a.code < b.code ? -1 : a.code > b.code ? 1 : 0;
     });
   }
+
+  size(): number {
+    return this.warnings.length;
+  }
+
+  sliceFrom(index: number): Warning[] {
+    return this.warnings.slice(index);
+  }
 }

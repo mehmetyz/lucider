@@ -4,7 +4,8 @@
   "description": "Comment directives in, compact AI context out — a queryable graph for Claude, Codex, and similar assistants",
   "type": "module",
   "bin": {
-    "lucider": "dist/cli/index.js"
+    "lucider": "dist/cli/index.js",
+    "lucider-mcp": "dist/mcp/stdio.js"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

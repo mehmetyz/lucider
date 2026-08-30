@@ -88,4 +88,22 @@ describe("queryChunk (dynamic context)", () => {
     const chunk = queryChunk(artifact, { search: "checkout", depth: 0 });
     expect(chunk.nodes.map((n) => n.name)).toEqual(["checkout"]);
   });
+
+  it("keeps only exact name matches when an exact symbol exists", () => {
+    const artifact = buildArtifact({
+      generatedFrom: "parse.ts",
+      entries: [
+        {
+          file: "parse.ts",
+          source:
+            "export const safeParse = (x) => x;\nexport const $SafeParse = {};\nexport const $SafeParseAsync = {};\n",
+        },
+      ],
+      adapter: new JavaScriptAdapter(),
+      prefix: "ai",
+      defaultBody: "off",
+    });
+    const chunk = queryChunk(artifact, { search: "safeParse", depth: 0 });
+    expect(chunk.nodes.map((n) => n.name)).toEqual(["safeParse"]);
+  });
 });

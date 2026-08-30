@@ -1,4 +1,6 @@
+import type { RefNode } from "../parsers/adapter.js";
 import type { AnnotatedNode, Edge } from "../types.js";
+import type { RawNode } from "./nodes.js";
 import type { WarningCollector } from "./warnings.js";
 
 function span(node: AnnotatedNode): number {
@@ -87,6 +89,64 @@ export function buildDependsEdges(
     }
   }
   return edges;
+}
+
+function innermostEnclosingRaw(
+  raws: RawNode[],
+  file: string,
+  ref: RefNode,
+): RawNode | undefined {
+  const inside = raws.filter(
+    (n) =>
+      n.location.file === file &&
+      n.startIndex < ref.startIndex &&
+      ref.endIndex <= n.endIndex,
+  );
+  if (inside.length === 0) return undefined;
+  return inside.reduce((a, b) =>
+    a.endIndex - a.startIndex <= b.endIndex - b.startIndex ? a : b,
+  );
+}
+
+/**
+ * Build `depends` edges from identifier uses. Unknown names invent no node;
+ * self-edges are dropped. Does not warn (unresolved `ai-deps` still warn).
+ */
+export function buildStructuralDepends(
+  raws: RawNode[],
+  nodes: AnnotatedNode[],
+  refsByFile: Map<string, RefNode[]>,
+): Edge[] {
+  const edges: Edge[] = [];
+  for (const file of [...refsByFile.keys()].sort()) {
+    const refs = [...(refsByFile.get(file) ?? [])].sort(
+      (a, b) => a.startIndex - b.startIndex || a.endIndex - b.endIndex,
+    );
+    for (const ref of refs) {
+      const fromRaw = innermostEnclosingRaw(raws, file, ref);
+      if (!fromRaw) continue;
+      const fromNode = nodes.find((n) => n.id === fromRaw.id);
+      if (!fromNode) continue;
+      const target = resolveDep(ref.name, fromNode, nodes);
+      if (!target || target.id === fromNode.id) continue;
+      edges.push({ type: "depends", from: fromNode.id, to: target.id });
+    }
+  }
+  return edges;
+}
+
+/** One `{ type: "depends", from, to }` pair; structural ∪ authored. */
+export function unionDependsEdges(structural: Edge[], authored: Edge[]): Edge[] {
+  const seen = new Set<string>();
+  const out: Edge[] = [];
+  for (const edge of [...structural, ...authored]) {
+    if (edge.type !== "depends") continue;
+    const key = `${edge.from}\0${edge.to}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push(edge);
+  }
+  return out;
 }
 
 export interface NeighbourSlice {
