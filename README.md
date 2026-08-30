@@ -69,7 +69,7 @@ What you **store** (50 tokens vs 295 raw on this fixture, ~83% reduction). Do no
 ```markdown
 # Lucider Context — examples/shop
 
-Schema 1.0.0 · Grammar 1.1.0 · 8 symbols · 11 edges · ~83.1% token reduction (50/295).
+Schema 1.0.0 · Grammar 1.2.0 · 8 symbols · 11 edges · ~83.1% token reduction (50/295).
 
 ## examples/shop/auth.js
 
@@ -127,7 +127,7 @@ Verifies password and returns a session token
 ```json
 {
   "schemaVersion": "1.0.0",
-  "grammarVersion": "1.1.0",
+  "grammarVersion": "1.2.0",
   "generatedFrom": "examples/shop",
   "metrics": {
     "rawTokens": 295,
@@ -227,16 +227,29 @@ lucider src --strict
 `--default-body on` exists so a **live query** still includes bodies on the hit slice. It is
 the wrong default for “dump every symbol into chat.”
 
-## Directives (v1.1.0)
+## Directives (v1.2.0)
 
-Form: `<prefix>-<key>: <value>` in `//` or `/* */` comments immediately above a declaration.
+Form: `<prefix>-<key>: <value>` in `//` or `/* */` comments. Place them immediately above a
+declaration, or put `ai-ignore` inside a body to hide the **next instruction** only.
 
 | Key | Value | Meaning |
 |-----|-------|---------|
 | `ai-context` | free text | Authored summary; overrides the derived baseline. |
 | `ai-body` | `on` / `off` | Include or exclude the symbol body. |
-| `ai-ignore` | *(none)* | Drop the declaration from the graph. |
+| `ai-ignore` | *(none)* | Above a declaration: drop that symbol from the graph. Inside a body: omit the next statement from the published body; the enclosing function stays. |
 | `ai-deps` | comma-separated names | Explicit edges for depth-1 expansion. |
+
+```js
+function test() {
+  doWork()
+  // ai-ignore
+  console.log('noise')
+  return 1
+}
+```
+
+Published body keeps `doWork()` and `return 1`. An ignore with no following instruction stays
+orphaned (`orphaned_directive`) and does not drop the function.
 
 Malformed, orphaned, conflicting, unknown, and deprecated directives produce located warnings.
 

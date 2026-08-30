@@ -1,7 +1,7 @@
 import type { CommentNode } from "../parsers/adapter.js";
 import type { Directive } from "../types.js";
 
-export const GRAMMAR_VERSION = "1.1.0";
+export const GRAMMAR_VERSION = "1.2.0";
 
 /** Keys that are valid with no value (`ai-ignore` or `ai-ignore:`). */
 export const VALUELESS_KEYS = new Set(["ignore"]);

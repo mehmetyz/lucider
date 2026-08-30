@@ -13,4 +13,4 @@ export { queryChunk } from "./core/query.js";
 export type { QueryArgs, QueryChunk } from "./core/query.js";
 export { renderMarkdown, renderChunk } from "./output/markdown.js";
 export { computeFingerprint, resolveStaleness, emptyBaseline } from "./core/staleness.js";
-export type { LanguageAdapter, DeclNode, CommentNode } from "./parsers/adapter.js";
+export type { LanguageAdapter, DeclNode, CommentNode, StmtNode } from "./parsers/adapter.js";

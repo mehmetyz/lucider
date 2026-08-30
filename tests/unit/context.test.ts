@@ -20,8 +20,10 @@ function rawNode(text: string, directives: Directive[] = []): RawNode {
     kind: "function",
     name: "sum",
     location: { file: "f.js", startLine: 2, endLine: 4 },
+    startIndex: 0,
     text,
     directives,
+    omitRanges: [],
   };
 }
 

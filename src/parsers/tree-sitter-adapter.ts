@@ -1,5 +1,5 @@
 import Parser from "tree-sitter";
-import type { CommentNode, DeclNode, LanguageAdapter } from "./adapter.js";
+import type { CommentNode, DeclNode, LanguageAdapter, StmtNode } from "./adapter.js";
 
 type TSNode = Parser.SyntaxNode;
 
@@ -71,5 +71,25 @@ export class TreeSitterAdapter implements LanguageAdapter {
     };
     visit(this.root(source));
     return comments;
+  }
+
+  parseStatements(source: string): StmtNode[] {
+    const stmts: StmtNode[] = [];
+    const visit = (node: TSNode): void => {
+      if (node.type === "statement_block") {
+        for (const child of node.namedChildren) {
+          if (child.type === "comment") continue;
+          stmts.push({
+            startLine: child.startPosition.row + 1,
+            endLine: child.endPosition.row + 1,
+            startIndex: child.startIndex,
+            endIndex: child.endIndex,
+          });
+        }
+      }
+      for (const child of node.namedChildren) visit(child);
+    };
+    visit(this.root(source));
+    return stmts;
   }
 }

@@ -52,6 +52,29 @@ export function applyContext(node: RawNode, defaultBody: BodyDefault): ContextRe
     context,
     contextSource,
     bodyIncluded,
-    body: bodyIncluded ? node.text : null,
+    body: bodyIncluded ? spliceOmitRanges(node.text, node.startIndex, node.omitRanges) : null,
   };
+}
+
+function spliceOmitRanges(
+  text: string,
+  declStart: number,
+  ranges: { startIndex: number; endIndex: number }[] | undefined,
+): string {
+  if (!ranges || ranges.length === 0) return text;
+
+  const locals = ranges
+    .map((r) => ({ start: r.startIndex - declStart, end: r.endIndex - declStart }))
+    .filter((r) => r.start >= 0 && r.end <= text.length && r.start < r.end)
+    .sort((a, b) => a.start - b.start);
+
+  const parts: string[] = [];
+  let cursor = 0;
+  for (const r of locals) {
+    if (r.start < cursor) continue;
+    if (r.start > cursor) parts.push(text.slice(cursor, r.start));
+    cursor = r.end;
+  }
+  if (cursor < text.length) parts.push(text.slice(cursor));
+  return parts.join("");
 }

@@ -5,6 +5,7 @@ import { JavaScriptAdapter } from "../../src/parsers/javascript.js";
 import { createRegistry } from "../../src/directives/registry.js";
 import { WarningCollector } from "../../src/core/warnings.js";
 import { buildArtifact } from "../../src/core/pipeline.js";
+import { queryChunk } from "../../src/core/query.js";
 import type { CommentNode } from "../../src/parsers/adapter.js";
 
 function line(text: string, n = 1): CommentNode {
@@ -55,6 +56,32 @@ describe("ai-ignore association", () => {
     const { nodes: n, warnings } = nodes(src);
     expect(n.map((x) => x.name)).toEqual(["publicFn"]);
     expect(warnings.list().some((w) => w.code === "malformed_directive")).toBe(false);
+  });
+
+  it("drops declaration-level ignore while keeping a sibling with only interior ignore", () => {
+    const src = [
+      "// ai-ignore",
+      "function secret() { return 1 }",
+      "function test() {",
+      "  // ai-ignore",
+      "  console.log('x')",
+      "  return 2",
+      "}",
+      "",
+    ].join("\n");
+    const artifact = buildArtifact({
+      generatedFrom: "t.js",
+      entries: [{ file: "t.js", source: src }],
+      adapter: new JavaScriptAdapter(),
+      prefix: "ai",
+      defaultBody: "on",
+    });
+    expect(artifact.nodes.map((n) => n.name)).toEqual(["test"]);
+    const body = artifact.nodes[0]!.body ?? "";
+    expect(body).toContain("return 2");
+    expect(body).not.toContain("console.log");
+    const chunk = queryChunk(artifact, { search: "secret", depth: 0 });
+    expect(chunk.nodes.every((n) => n.name !== "secret")).toBe(true);
   });
 
   it("does not emit the ignored symbol in the artifact", () => {

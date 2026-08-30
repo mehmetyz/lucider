@@ -32,4 +32,12 @@ describe("JavaScriptAdapter", () => {
     expect(comments[0]!.startLine).toBe(1);
     expect(comments[0]!.text).toContain("hello");
   });
+
+  it("lists statement ranges inside function bodies", () => {
+    const src = "function test() {\n  doWork();\n  return 1;\n}\n";
+    const stmts = adapter.parseStatements(src);
+    expect(stmts.length).toBeGreaterThanOrEqual(2);
+    expect(src.slice(stmts[0]!.startIndex, stmts[0]!.endIndex)).toContain("doWork");
+    expect(src.slice(stmts[1]!.startIndex, stmts[1]!.endIndex)).toContain("return");
+  });
 });

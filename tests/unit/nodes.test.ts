@@ -1,5 +1,9 @@
 import { describe, it, expect } from "vitest";
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
+import { fileURLToPath } from "node:url";
 import { buildNodes } from "../../src/core/nodes.js";
+import { buildArtifact } from "../../src/core/pipeline.js";
 import { JavaScriptAdapter } from "../../src/parsers/javascript.js";
 import { createRegistry } from "../../src/directives/registry.js";
 import { WarningCollector } from "../../src/core/warnings.js";
@@ -53,5 +57,38 @@ describe("buildNodes / directive association", () => {
     const f = nodes.find((n) => n.name === "f")!;
     const body = f.directives.filter((d) => d.key === "body").at(-1)!;
     expect(body.value).toBe("off");
+  });
+});
+
+describe("unmarked examples/shop bodies (FR-010)", () => {
+  it("publishes declaration text unchanged when there is no interior ignore", () => {
+    const shopDir = fileURLToPath(new URL("../../examples/shop/", import.meta.url));
+    const files = ["auth.js", "cart.js"];
+    const adapter = new JavaScriptAdapter();
+    const entries = files.map((name) => {
+      const file = `examples/shop/${name}`;
+      const source = readFileSync(join(shopDir, name), "utf8");
+      return { file, source };
+    });
+
+    const artifact = buildArtifact({
+      generatedFrom: "examples/shop",
+      entries,
+      adapter,
+      prefix: "ai",
+      defaultBody: "on",
+    });
+
+    for (const entry of entries) {
+      const decls = adapter.parseDeclarations(entry.source);
+      for (const node of artifact.nodes.filter((n) => n.location.file === entry.file)) {
+        if (!node.bodyIncluded || node.body === null) continue;
+        const decl = decls.find(
+          (d) => d.name === node.name && d.kind === node.kind && d.startLine === node.location.startLine,
+        );
+        expect(decl, `${node.id} should match a declaration`).toBeDefined();
+        expect(node.body).toBe(decl!.text);
+      }
+    }
   });
 });

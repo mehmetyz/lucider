@@ -4,6 +4,7 @@ import { fileURLToPath } from "node:url";
 import Ajv from "ajv/dist/2020.js";
 import { buildArtifact } from "../../src/core/pipeline.js";
 import { JavaScriptAdapter } from "../../src/parsers/javascript.js";
+import { GRAMMAR_VERSION } from "../../src/directives/grammar.js";
 
 const schemaPath = fileURLToPath(
   new URL("../../specs/001-ai-context-graph/contracts/artifact.schema.json", import.meta.url),
@@ -33,5 +34,17 @@ describe("contract: artifact schema", () => {
       );
     }
     expect(valid).toBe(true);
+  });
+
+  it("reports grammarVersion 1.2.0", () => {
+    const artifact = buildArtifact({
+      generatedFrom: "t.js",
+      entries: [{ file: "t.js", source: "function f() { return 1; }\n" }],
+      adapter: new JavaScriptAdapter(),
+      prefix: "ai",
+      defaultBody: "on",
+    });
+    expect(GRAMMAR_VERSION).toBe("1.2.0");
+    expect(artifact.grammarVersion).toBe("1.2.0");
   });
 });

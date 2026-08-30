@@ -1,17 +1,26 @@
-import type { LanguageAdapter } from "../parsers/adapter.js";
+import type { CommentNode, DeclNode, LanguageAdapter, StmtNode } from "../parsers/adapter.js";
 import type { Directive, Location } from "../types.js";
 import type { Registry } from "../directives/registry.js";
 import { extractDirectives } from "../directives/grammar.js";
 import { WarningCollector } from "./warnings.js";
 import { makeNodeId } from "./ids.js";
 
+export interface OmitRange {
+  startIndex: number;
+  endIndex: number;
+}
+
 export interface RawNode {
   id: string;
   kind: string;
   name: string;
   location: Location;
+  /** File-absolute start of `text` (declaration span). */
+  startIndex: number;
   text: string;
   directives: Directive[];
+  /** File-absolute spans to splice out of the published body. */
+  omitRanges: OmitRange[];
 }
 
 export interface BuildNodesArgs {
@@ -30,6 +39,7 @@ export function buildNodes(args: BuildNodesArgs): RawNode[] {
     .parseDeclarations(source)
     .sort((a, b) => a.startIndex - b.startIndex);
   const comments = adapter.parseComments(source);
+  const statements = adapter.parseStatements(source);
 
   const commentLines = new Set<number>();
   for (const c of comments) {
@@ -37,11 +47,13 @@ export function buildNodes(args: BuildNodesArgs): RawNode[] {
   }
 
   const directivesByLine = new Map<number, Directive[]>();
+  const commentByDirective = new Map<Directive, CommentNode>();
   const allDirectives: Directive[] = [];
   for (const c of comments) {
     for (const d of extractDirectives(c, prefix)) {
       d.location.file = file;
       allDirectives.push(d);
+      commentByDirective.set(d, c);
       const bucket = directivesByLine.get(d.location.startLine) ?? [];
       bucket.push(d);
       directivesByLine.set(d.location.startLine, bucket);
@@ -70,6 +82,7 @@ export function buildNodes(args: BuildNodesArgs): RawNode[] {
     resolveStatuses(collected, registry, warnings);
     detectConflicts(collected, file, decl.startLine, warnings);
 
+    // Declaration-leading ignore still drops the whole symbol (US2).
     if (collected.some((d) => d.key === "ignore")) continue;
 
     const occKey = `${decl.name}#${decl.kind}`;
@@ -81,23 +94,81 @@ export function buildNodes(args: BuildNodesArgs): RawNode[] {
       kind: decl.kind,
       name: decl.name,
       location: { file, startLine: decl.startLine, endLine: decl.endLine },
+      startIndex: decl.startIndex,
       text: decl.text,
       directives: collected,
+      omitRanges: [],
     });
   }
 
+  const nodeByStart = new Map(nodes.map((n) => [n.startIndex, n]));
+
   for (const d of allDirectives) {
-    if (!associated.has(d)) {
-      d.status = "orphaned";
-      warnings.add(
-        "orphaned_directive",
-        `Directive ${d.prefix}-${d.key} has no following declaration`,
-        d.location,
-      );
+    if (associated.has(d)) continue;
+
+    const comment = commentByDirective.get(d);
+    if (d.key === "ignore" && comment) {
+      const enclosing = innermostEnclosingDecl(decls, comment);
+      if (enclosing) {
+        const node = nodeByStart.get(enclosing.startIndex);
+        const stmt = nextContainedStatement(statements, comment, enclosing);
+        if (node && stmt) {
+          associated.add(d);
+          resolveStatuses([d], registry, warnings);
+          node.directives.push(d);
+          node.omitRanges.push({
+            startIndex: comment.startIndex,
+            endIndex: stmt.endIndex,
+          });
+          continue;
+        }
+        d.status = "orphaned";
+        warnings.add(
+          "orphaned_directive",
+          `Directive ${d.prefix}-${d.key} has no following instruction`,
+          d.location,
+        );
+        continue;
+      }
     }
+
+    d.status = "orphaned";
+    warnings.add(
+      "orphaned_directive",
+      `Directive ${d.prefix}-${d.key} has no following declaration`,
+      d.location,
+    );
   }
 
   return nodes;
+}
+
+function innermostEnclosingDecl(
+  decls: DeclNode[],
+  comment: CommentNode,
+): DeclNode | undefined {
+  const inside = decls.filter(
+    (d) => d.startIndex < comment.startIndex && comment.endIndex <= d.endIndex,
+  );
+  if (inside.length === 0) return undefined;
+  return inside.reduce((a, b) =>
+    a.endIndex - a.startIndex <= b.endIndex - b.startIndex ? a : b,
+  );
+}
+
+function nextContainedStatement(
+  statements: StmtNode[],
+  comment: CommentNode,
+  enclosing: DeclNode,
+): StmtNode | undefined {
+  let best: StmtNode | undefined;
+  for (const stmt of statements) {
+    if (stmt.startIndex < comment.endIndex) continue;
+    if (stmt.startIndex < enclosing.startIndex) continue;
+    if (stmt.endIndex > enclosing.endIndex) continue;
+    if (!best || stmt.startIndex < best.startIndex) best = stmt;
+  }
+  return best;
 }
 
 function resolveStatuses(
