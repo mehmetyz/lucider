@@ -44,7 +44,9 @@ lucider examples/shop --query login --depth 1
 
 ### Graph
 
-`contains` is structure (file → symbol, class → method). `depends` is what you declared with `ai-deps`.
+`contains` is structure (file → symbol, class → method). `depends` is a **union** of
+calls and name uses found in the source plus any `ai-deps` you wrote. Unlabeled
+`login()` → `hashPassword()` still gets an edge. Duplicate pairs are stored once.
 
 ```mermaid
 flowchart LR
@@ -155,9 +157,10 @@ Verifies password and returns a session token
 
 ## Why
 
-- **Packs, not dumps** — `--query` returns the hit (and optional `ai-deps` neighbours). On
-  isolated coding tasks, quality matched a raw 150k-token dump at ~1–5k tokens. See
-  [performance](docs/performance.md).
+- **Packs, not dumps** — `--query` / `--file` / `--lines` / `--node-id` return a
+  slice (optional `--max-tokens`). On isolated coding tasks, quality matched a raw
+  150k-token dump at ~1–5k tokens. See [performance](docs/performance.md).
+  Catalog JSON (`--out`) is for storage, not the default assistant payload.
 - **Hybrid summaries** — Lucider derives a baseline from the AST; `ai-context` overrides it
   when you want a precise blurb.
 - **Drift-aware** — authored comments are fingerprinted. If the code moves and the comment
@@ -196,10 +199,17 @@ lucider <path> [options]
 | Option | Default | Description |
 |--------|---------|-------------|
 | `--out-dir <dir>` | — | Write `<dir>/context.json` and `<dir>/context.md`. |
-| `--out <file>` | stdout | JSON artifact. |
-| `--md <file>` | — | Markdown digest. |
-| `--query <term>` | — | Emit a short chunk for matching symbols (not the full index). |
-| `--depth <n>` | `0` | Graph hops for `--query` (`0` = hit only, `1` = hit + deps/neighbours). |
+| `--out <file>` | stdout | JSON **catalog** (full index). Not the assistant payload. |
+| `--md <file>` | — | Markdown digest, or the **pack** when a pack seed is set. |
+| `--query <term>` | — | Pack seed: matching symbols (not the full index). |
+| `--file <path>` | — | Pack seed (repeatable): symbols in that file. |
+| `--lines <file:start-end>` | — | Pack seed (repeatable): innermost symbol covering the inclusive range. |
+| `--diff` | off | Pack seed: `git diff HEAD` (staged + unstaged). |
+| `--diff-base <ref>` | — | Also union `git diff <ref>...HEAD` (PR-shaped). Implies a pack. |
+| `--node-id <id>` | — | Pack seed: follow-up by catalog node id. |
+| `--depth <n>` | `0` | Graph hops for a pack (`0` = seeds only, `1` = seeds + neighbours). |
+| `--max-tokens <n>` | — | Cap pack size (`approxTokens`). Omitted = no extra cut. |
+| `--no-cache` | off | Skip `.lucider/parse-cache.json` (content-hash parse cache is on by default). |
 | `--default-body <on\|off>` | `on` | Body inclusion when `ai-body` is omitted. Use `off` for a catalog. |
 | `--strict` | off | Exit `1` if any stale or malformed directive is present. |
 | `--baseline <file>` | `.lucider/baseline.json` | Sidecar for staleness. |
@@ -214,8 +224,18 @@ Exit codes: `0` success · `1` strict violation · `2` usage error · `3` path n
 # Catalog on disk — do not paste this into the model for a large unlabeled tree
 lucider src --out-dir .lucider --default-body off
 
-# Pack for Claude / Codex
+# Pack for Claude / Codex (unlabeled calls still hop via structural depends)
 lucider src --query login --depth 1 --md pack.md
+
+# Same idea from a file, a line range, or a catalog id
+lucider src --file auth.js --depth 0
+lucider src --lines auth.js:4-7 --depth 0
+lucider src --diff --depth 1 --max-tokens 2000
+lucider src --diff-base origin/main --depth 1 --max-tokens 2000
+lucider src --node-id 'src/auth.js::login#function@0' --depth 0
+
+# Keep a slice under a token budget (seed summary/body first)
+lucider src --query login --depth 1 --max-tokens 400
 
 # Staleness baseline (commit .lucider/baseline.json)
 lucider src --update-baseline
@@ -277,7 +297,31 @@ const artifact = buildArtifact({
 console.log(serializeArtifact(artifact));
 ```
 
-`queryChunk(artifact, { search: "login", depth: 1 })` returns the same cut the CLI prints.
+`queryChunk(artifact, { search: "login", depth: 1, maxTokens: 400 })` returns the same
+cut the CLI prints, plus `packTokens`. File/line/`nodeId` seeds work the same way.
+Exact symbol names win over longer names that only contain the substring (`safeParse`
+does not also seed `$SafeParse`).
+
+## MCP
+
+Agents should call Lucider twice when needed: a small `lucider_query`, then
+`lucider_expand` with a node id. Default `maxTokens` is 2000.
+
+```json
+{
+  "mcpServers": {
+    "lucider": {
+      "command": "lucider-mcp"
+    }
+  }
+}
+```
+
+`lucider_query({ path, search, files, lineRanges, depth, maxTokens })` ·
+`lucider_expand({ path, nodeId, depth, maxTokens })`.
+
+Parse cache lives at `<path>/.lucider/parse-cache.json` and invalidates per file
+content hash. `--no-cache` disables it on the CLI.
 
 ## Development
 

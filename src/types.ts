@@ -56,7 +56,8 @@ export type WarningCode =
   | "deprecated_key"
   | "parse_skipped"
   | "stale_context"
-  | "unresolved_dep";
+  | "unresolved_dep"
+  | "budget_truncated";
 
 export interface Warning {
   code: WarningCode;

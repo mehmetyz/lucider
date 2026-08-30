@@ -1,15 +1,21 @@
-import type { LanguageAdapter } from "../parsers/adapter.js";
+import type { LanguageAdapter, RefNode } from "../parsers/adapter.js";
 import type { AnnotatedNode, Baseline, ContextArtifact, Edge } from "../types.js";
 import type { Registry } from "../directives/registry.js";
 import { createRegistry } from "../directives/registry.js";
 import { resolveAdapter } from "../parsers/registry.js";
 import { WarningCollector } from "./warnings.js";
-import { buildNodes } from "./nodes.js";
+import { buildNodes, type RawNode } from "./nodes.js";
 import { applyContext, type BodyDefault } from "./context.js";
 import { computeFingerprint, resolveStaleness } from "./staleness.js";
 import { computeMetrics, type EmittedContext } from "./metrics.js";
 import { assembleArtifact } from "../output/artifact.js";
-import { buildContainmentEdges, buildDependsEdges } from "./graph.js";
+import {
+  buildContainmentEdges,
+  buildDependsEdges,
+  buildStructuralDepends,
+  unionDependsEdges,
+} from "./graph.js";
+import type { ParseCache } from "./parse-cache.js";
 
 export interface SourceEntry {
   file: string;
@@ -27,6 +33,11 @@ export interface BuildArtifactArgs {
   defaultBody: BodyDefault;
   registry?: Registry;
   baseline?: Baseline;
+  /**
+   * Optional parse cache (file + content hash). Unchanged files skip Tree-sitter.
+   * Call `cache.flush()` after the build if the implementation buffers to disk.
+   */
+  parseCache?: ParseCache;
 }
 
 export function buildArtifact(args: BuildArtifactArgs): ContextArtifact {
@@ -34,6 +45,8 @@ export function buildArtifact(args: BuildArtifactArgs): ContextArtifact {
   const warnings = new WarningCollector();
   const nodes: AnnotatedNode[] = [];
   const emitted: EmittedContext[] = [];
+  const allRaws: RawNode[] = [];
+  const refsByFile = new Map<string, RefNode[]>();
 
   const adapterList = args.adapters ?? (args.adapter ? [args.adapter] : []);
   if (adapterList.length === 0) {
@@ -43,14 +56,34 @@ export function buildArtifact(args: BuildArtifactArgs): ContextArtifact {
   for (const entry of args.entries) {
     const adapter =
       resolveAdapter(entry.file, adapterList) ?? adapterList[0]!;
-    const raws = buildNodes({
-      file: entry.file,
-      source: entry.source,
-      adapter,
-      prefix: args.prefix,
-      registry,
-      warnings,
-    });
+    const cached = args.parseCache?.load(entry.file, entry.source, args.prefix);
+    let raws: RawNode[];
+    let refs: RefNode[];
+    if (cached) {
+      raws = cached.raws;
+      refs = cached.refs;
+      for (const w of cached.warnings) {
+        warnings.add(w.code, w.message, w.location);
+      }
+    } else {
+      const warnAt = warnings.size();
+      raws = buildNodes({
+        file: entry.file,
+        source: entry.source,
+        adapter,
+        prefix: args.prefix,
+        registry,
+        warnings,
+      });
+      refs = adapter.parseReferences(entry.source);
+      args.parseCache?.save(entry.file, entry.source, args.prefix, {
+        raws,
+        refs,
+        warnings: warnings.sliceFrom(warnAt),
+      });
+    }
+    allRaws.push(...raws);
+    refsByFile.set(entry.file, refs);
 
     for (const raw of raws) {
       const ctx = applyContext(raw, args.defaultBody);
@@ -90,7 +123,9 @@ export function buildArtifact(args: BuildArtifactArgs): ContextArtifact {
   const rawSource = args.entries.map((e) => e.source).join("\n");
   const metrics = computeMetrics(rawSource, emitted);
   const containment = buildContainmentEdges(nodes);
-  const depends = buildDependsEdges(nodes, warnings);
+  const authored = buildDependsEdges(nodes, warnings);
+  const structural = buildStructuralDepends(allRaws, nodes, refsByFile);
+  const depends = unionDependsEdges(structural, authored);
   const edges: Edge[] = [...containment, ...depends];
 
   return assembleArtifact({

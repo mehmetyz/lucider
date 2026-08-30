@@ -1,33 +1,19 @@
 #!/usr/bin/env node
-import { parseArgs } from "node:util";
-import { readFileSync, writeFileSync, mkdirSync, statSync, readdirSync, realpathSync } from "node:fs";
-import { join, extname, dirname } from "node:path";
+import { mkdirSync, readFileSync, realpathSync, statSync, writeFileSync } from "node:fs";
+import { dirname, join } from "node:path";
 import { pathToFileURL } from "node:url";
-import type { Baseline } from "../types.js";
+import { parseArgs } from "node:util";
+import type { BodyDefault } from "../core/context.js";
+import { collectDiffRanges } from "../core/diff.js";
+import { FileParseCache } from "../core/parse-cache.js";
+import { discover } from "../core/pack.js";
 import { buildArtifact, type SourceEntry } from "../core/pipeline.js";
+import { queryChunk } from "../core/query.js";
+import { emptyBaseline } from "../core/staleness.js";
 import { serializeArtifact } from "../output/artifact.js";
 import { renderMarkdown } from "../output/markdown.js";
-import { queryChunk } from "../core/query.js";
 import { allAdapters, supportedExtensions } from "../parsers/registry.js";
-import { emptyBaseline } from "../core/staleness.js";
-import type { BodyDefault } from "../core/context.js";
-
-const IGNORED_DIRS = new Set(["node_modules", ".git", "dist", ".lucider"]);
-
-function discover(path: string, extensions: string[]): string[] {
-  const stat = statSync(path);
-  if (stat.isFile()) return [path];
-  const out: string[] = [];
-  for (const entry of readdirSync(path, { withFileTypes: true })) {
-    if (entry.isDirectory()) {
-      if (IGNORED_DIRS.has(entry.name)) continue;
-      out.push(...discover(join(path, entry.name), extensions));
-    } else if (extensions.includes(extname(entry.name))) {
-      out.push(join(path, entry.name));
-    }
-  }
-  return out.sort();
-}
+import type { Baseline } from "../types.js";
 
 function loadBaseline(path: string): Baseline | undefined {
   try {
@@ -54,6 +40,13 @@ export function runCli(argv: string[]): number {
         prefix: { type: "string", default: "ai" },
         query: { type: "string" },
         depth: { type: "string", default: "0" },
+        "max-tokens": { type: "string" },
+        "node-id": { type: "string" },
+        file: { type: "string", multiple: true },
+        lines: { type: "string", multiple: true },
+        diff: { type: "boolean", default: false },
+        "diff-base": { type: "string" },
+        "no-cache": { type: "boolean", default: false },
       },
     });
   } catch (err) {
@@ -64,16 +57,42 @@ export function runCli(argv: string[]): number {
   const target = parsed.positionals[0];
   if (!target) {
     process.stderr.write(
-      "Usage: lucider <path> [--query term] [--depth N] [--out-dir .lucider] [--out file.json] [--md file.md] [--strict] [--prefix ai] [--default-body on|off]\n",
+      "Usage: lucider <path> [--query term] [--file path] [--lines file:start-end] [--diff] [--diff-base ref] [--node-id id] [--depth N] [--max-tokens N] [--out-dir .lucider] [--out catalog.json] [--md pack.md] [--strict] [--prefix ai] [--default-body on|off] [--no-cache]\n" +
+        "Catalog JSON (no pack seed) is for storage, not the default assistant payload. Use --query / --file / --lines / --diff / --node-id for a pack.\n",
     );
     return 2;
   }
 
+  const fileSeeds = asList(parsed.values.file);
+  const lineRaw = asList(parsed.values.lines);
+  const lineRanges: { file: string; startLine: number; endLine: number }[] = [];
+  for (const spec of lineRaw) {
+    const parsedLines = parseLineSpec(spec);
+    if (!parsedLines) {
+      process.stderr.write(`Usage error: invalid --lines '${spec}' (expected file:start-end)\n`);
+      return 2;
+    }
+    lineRanges.push(parsedLines);
+  }
+
+  const wantDiff = Boolean(parsed.values.diff) || Boolean(parsed.values["diff-base"]);
+
   const defaultBody = parsed.values["default-body"] === "off" ? "off" : "on";
   const query = parsed.values.query as string | undefined;
+  const nodeId = parsed.values["node-id"] as string | undefined;
   const depth = Number.parseInt(String(parsed.values.depth ?? "0"), 10) || 0;
-  // Live query fetches exact-point bodies even if the index would omit them.
-  const effectiveBody = query ? "on" : defaultBody;
+  const maxTokensRaw = parsed.values["max-tokens"] as string | undefined;
+  let maxTokens: number | undefined;
+  if (maxTokensRaw !== undefined) {
+    maxTokens = Number.parseInt(maxTokensRaw, 10);
+    if (!Number.isFinite(maxTokens) || maxTokens < 0) {
+      process.stderr.write(`Usage error: --max-tokens must be a non-negative integer\n`);
+      return 2;
+    }
+  }
+  const isPack = Boolean(query || nodeId || fileSeeds.length || lineRanges.length || wantDiff);
+  // Pack seeds parse with bodies on so the slice can include implementations.
+  const effectiveBody = isPack ? "on" : defaultBody;
   const prefix = parsed.values.prefix as string;
   const adapters = allAdapters();
 
@@ -83,6 +102,17 @@ export function runCli(argv: string[]): number {
   } catch {
     process.stderr.write(`Error: path not found: ${target}\n`);
     return 3;
+  }
+
+  if (wantDiff) {
+    try {
+      const gitCwd = statSync(target).isFile() ? dirname(target) : target;
+      const fromGit = collectDiffRanges(gitCwd, parsed.values["diff-base"] as string | undefined);
+      lineRanges.push(...fromGit);
+    } catch (err) {
+      process.stderr.write(`Usage error: ${(err as Error).message}\n`);
+      return 2;
+    }
   }
 
   const entries: SourceEntry[] = [];
@@ -98,6 +128,12 @@ export function runCli(argv: string[]): number {
   const baselinePath = parsed.values.baseline as string;
   const baseline = loadBaseline(baselinePath);
 
+  let parseCache: FileParseCache | undefined;
+  if (!parsed.values["no-cache"]) {
+    const cacheRoot = statSync(target).isFile() ? dirname(target) : target;
+    parseCache = new FileParseCache(join(cacheRoot, ".lucider", "parse-cache.json"));
+  }
+
   const artifact = buildArtifact({
     generatedFrom: target,
     entries,
@@ -105,7 +141,9 @@ export function runCli(argv: string[]): number {
     prefix,
     defaultBody: effectiveBody as BodyDefault,
     baseline,
+    parseCache,
   });
+  parseCache?.flush();
 
   for (const file of skipped) {
     artifact.warnings.push({
@@ -127,9 +165,21 @@ export function runCli(argv: string[]): number {
   }
 
   const jsonStr = serializeArtifact(artifact);
-  const mdStr = query
-    ? queryChunk(artifact, { search: query, depth, includeSeedBodies: true }).markdown
-    : renderMarkdown(artifact);
+  const chunk = isPack
+    ? queryChunk(artifact, {
+        search: query,
+        nodeId,
+        files: fileSeeds.length ? fileSeeds : undefined,
+        lineRanges: lineRanges.length ? lineRanges : undefined,
+        depth,
+        includeSeedBodies: true,
+        maxTokens,
+      })
+    : undefined;
+  const mdStr = chunk ? chunk.markdown : renderMarkdown(artifact);
+  if (chunk?.truncated) {
+    process.stderr.write("[budget_truncated] seed body omitted to stay within the token budget\n");
+  }
   const write = (path: string, content: string): void => {
     mkdirSync(dirname(path), { recursive: true });
     writeFileSync(path, content, "utf8");
@@ -155,7 +205,7 @@ export function runCli(argv: string[]): number {
     wroteFile = true;
   }
   if (!wroteFile) {
-    process.stdout.write((query ? mdStr : jsonStr) + "\n");
+    process.stdout.write((isPack ? mdStr : jsonStr) + "\n");
   }
 
   for (const w of artifact.warnings) {
@@ -168,6 +218,22 @@ export function runCli(argv: string[]): number {
   );
   if (parsed.values.strict && strictViolation) return 1;
   return 0;
+}
+
+function asList(value: string | string[] | undefined): string[] {
+  if (value === undefined) return [];
+  return Array.isArray(value) ? value : [value];
+}
+
+function parseLineSpec(spec: string): { file: string; startLine: number; endLine: number } | undefined {
+  const match = spec.match(/^(.*):(\d+)-(\d+)$/);
+  if (!match) return undefined;
+  const startLine = Number.parseInt(match[2]!, 10);
+  const endLine = Number.parseInt(match[3]!, 10);
+  if (!Number.isFinite(startLine) || !Number.isFinite(endLine) || startLine < 1 || endLine < startLine) {
+    return undefined;
+  }
+  return { file: match[1]!, startLine, endLine };
 }
 
 function isCliEntry(argv1: string | undefined): boolean {

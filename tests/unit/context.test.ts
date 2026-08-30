@@ -21,6 +21,7 @@ function rawNode(text: string, directives: Directive[] = []): RawNode {
     name: "sum",
     location: { file: "f.js", startLine: 2, endLine: 4 },
     startIndex: 0,
+    endIndex: text.length,
     text,
     directives,
     omitRanges: [],

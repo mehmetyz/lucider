@@ -40,4 +40,19 @@ describe("JavaScriptAdapter", () => {
     expect(src.slice(stmts[0]!.startIndex, stmts[0]!.endIndex)).toContain("doWork");
     expect(src.slice(stmts[1]!.startIndex, stmts[1]!.endIndex)).toContain("return");
   });
+
+  it("lists identifier uses, not property names or declaration names", () => {
+    const src = "function login(user) { return hashPassword(user).length; }\nfunction hashPassword(p) { return p; }\n";
+    const refs = adapter.parseReferences(src);
+    expect(refs.some((r) => r.name === "hashPassword")).toBe(true);
+    expect(refs.some((r) => r.name === "login")).toBe(false);
+    expect(refs.some((r) => r.name === "length")).toBe(false);
+  });
+
+  it("declares exported const bindings", () => {
+    const decls = adapter.parseDeclarations("export const parse = (x) => x;\n");
+    const c = decls.find((d) => d.name === "parse");
+    expect(c).toBeDefined();
+    expect(c!.kind).toBe("const");
+  });
 });

@@ -24,6 +24,15 @@ export interface StmtNode {
   endIndex: number;
 }
 
+/** File-absolute identifier use (not a declaration name or object property). */
+export interface RefNode {
+  name: string;
+  startLine: number;
+  endLine: number;
+  startIndex: number;
+  endIndex: number;
+}
+
 /**
  * A language plugin. The core engine depends only on this interface so that new
  * languages can be added without touching the language-agnostic core
@@ -36,4 +45,6 @@ export interface LanguageAdapter {
   parseComments(source: string): CommentNode[];
   /** Implementations that cannot list statements MUST return `[]`. */
   parseStatements(source: string): StmtNode[];
+  /** Implementations that cannot list references MUST return `[]`. */
+  parseReferences(source: string): RefNode[];
 }

@@ -17,6 +17,7 @@ export interface RawNode {
   location: Location;
   /** File-absolute start of `text` (declaration span). */
   startIndex: number;
+  endIndex: number;
   text: string;
   directives: Directive[];
   /** File-absolute spans to splice out of the published body. */
@@ -95,6 +96,7 @@ export function buildNodes(args: BuildNodesArgs): RawNode[] {
       name: decl.name,
       location: { file, startLine: decl.startLine, endLine: decl.endLine },
       startIndex: decl.startIndex,
+      endIndex: decl.endIndex,
       text: decl.text,
       directives: collected,
       omitRanges: [],

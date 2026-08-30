@@ -7,7 +7,7 @@ import { execFileSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 
 const ALLOWED = /^(package\.json|LICENSE|README\.md|dist\/.+\.(js|d\.ts))$/;
-const REQUIRED = ["package.json", "LICENSE", "README.md", "dist/index.js", "dist/cli/index.js"];
+const REQUIRED = ["package.json", "LICENSE", "README.md", "dist/index.js", "dist/cli/index.js", "dist/mcp/stdio.js"];
 const FORBIDDEN = /\.(env|pem|key)$|node_modules|\.git\/|src\/|tests\/|specs\/|\.cursor\/|context\.json/;
 
 const raw = execFileSync("npm", ["pack", "--dry-run", "--json"], {
@@ -33,6 +33,11 @@ if (missing.length) {
 const cli = readFileSync("dist/cli/index.js", "utf8");
 if (!cli.startsWith("#!/usr/bin/env node")) {
   console.error("dist/cli/index.js is missing the node shebang");
+  process.exit(1);
+}
+const mcp = readFileSync("dist/mcp/stdio.js", "utf8");
+if (!mcp.startsWith("#!/usr/bin/env node")) {
+  console.error("dist/mcp/stdio.js is missing the node shebang");
   process.exit(1);
 }
 

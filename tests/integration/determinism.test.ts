@@ -17,4 +17,19 @@ describe("determinism (Constitution Principle II)", () => {
       );
     expect(run()).toBe(run());
   });
+
+  it("is byte-identical for unlabeled calls and exported consts (SC-006)", () => {
+    const entries = [
+      {
+        file: "auth.js",
+        source: "function hashPassword(p) { return p; }\nfunction login() { return hashPassword(1); }\n",
+      },
+      { file: "parse.js", source: "export const parse = (x) => x;\n" },
+    ];
+    const run = () =>
+      serializeArtifact(
+        buildArtifact({ generatedFrom: "p", entries, adapter, prefix: "ai", defaultBody: "on" }),
+      );
+    expect(run()).toBe(run());
+  });
 });

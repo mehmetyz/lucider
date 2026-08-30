@@ -1,5 +1,8 @@
 # Contract: Context query (chunk)
 
+005 pack seeds, `maxTokens`, and `packTokens`:
+[../../005-budgeted-structural-packs/contracts/query.md](../../005-budgeted-structural-packs/contracts/query.md).
+
 Library and CLI share the same selection rules. Full artifact schema remains
 `specs/001-ai-context-graph/contracts/artifact.schema.json` (edge type `depends` added there).
 
