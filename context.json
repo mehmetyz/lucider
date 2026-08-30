@@ -1,0 +1,172 @@
+{
+  "edges": [
+    {
+      "from": "tests/fixtures/basic/math.js",
+      "to": "tests/fixtures/basic/math.js::Calculator#class@0",
+      "type": "contains"
+    },
+    {
+      "from": "tests/fixtures/basic/math.js",
+      "to": "tests/fixtures/basic/math.js::mul#function@0",
+      "type": "contains"
+    },
+    {
+      "from": "tests/fixtures/basic/math.js",
+      "to": "tests/fixtures/basic/math.js::sum#function@0",
+      "type": "contains"
+    },
+    {
+      "from": "tests/fixtures/basic/math.js::Calculator#class@0",
+      "to": "tests/fixtures/basic/math.js::add#method@0",
+      "type": "contains"
+    }
+  ],
+  "generatedFrom": "tests/fixtures/basic",
+  "grammarVersion": "1.0.0",
+  "metrics": {
+    "emittedBytes": 327,
+    "emittedTokens": 83,
+    "rawBytes": 390,
+    "rawTokens": 112,
+    "reductionRatio": 0.2589285714285714
+  },
+  "nodes": [
+    {
+      "body": "class Calculator {\n  // ai-context: Adds a value to the running total\n  // ai-body: off\n  add(value) {\n    this.total = (this.total ?? 0) + value;\n    return this.total;\n  }\n}",
+      "bodyIncluded": true,
+      "context": "class Calculator",
+      "contextSource": "derived",
+      "derivedSummary": "class Calculator",
+      "directives": [],
+      "fingerprint": "c8503e895a7bb8bfa7d00cfa1d2b26dbf98e16e72b4aeb354ae48bfdc39140fd",
+      "id": "tests/fixtures/basic/math.js::Calculator#class@0",
+      "kind": "class",
+      "location": {
+        "endLine": 20,
+        "file": "tests/fixtures/basic/math.js",
+        "startLine": 13
+      },
+      "name": "Calculator",
+      "staleness": "fresh"
+    },
+    {
+      "body": null,
+      "bodyIncluded": false,
+      "context": "Adds a value to the running total",
+      "contextSource": "authored",
+      "derivedSummary": "add(value)",
+      "directives": [
+        {
+          "key": "context",
+          "location": {
+            "endLine": 14,
+            "file": "tests/fixtures/basic/math.js",
+            "startLine": 14
+          },
+          "prefix": "ai",
+          "raw": "// ai-context: Adds a value to the running total",
+          "status": "ok",
+          "value": "Adds a value to the running total"
+        },
+        {
+          "key": "body",
+          "location": {
+            "endLine": 15,
+            "file": "tests/fixtures/basic/math.js",
+            "startLine": 15
+          },
+          "prefix": "ai",
+          "raw": "// ai-body: off",
+          "status": "ok",
+          "value": "off"
+        }
+      ],
+      "fingerprint": "2a86471de24257de0d4eed916496a26305e67e3be9d66b1080c08ca905d44a13",
+      "id": "tests/fixtures/basic/math.js::add#method@0",
+      "kind": "method",
+      "location": {
+        "endLine": 19,
+        "file": "tests/fixtures/basic/math.js",
+        "startLine": 16
+      },
+      "name": "add",
+      "staleness": "unknown"
+    },
+    {
+      "body": "function mul(a, b) {\n  return a * b;\n}",
+      "bodyIncluded": true,
+      "context": "Multiplies two numbers together",
+      "contextSource": "authored",
+      "derivedSummary": "function mul(a, b)",
+      "directives": [
+        {
+          "key": "context",
+          "location": {
+            "endLine": 8,
+            "file": "tests/fixtures/basic/math.js",
+            "startLine": 8
+          },
+          "prefix": "ai",
+          "raw": "// ai-context: Multiplies two numbers together",
+          "status": "ok",
+          "value": "Multiplies two numbers together"
+        }
+      ],
+      "fingerprint": "c4d009aaadeddd0245a8d01726c133c2f34d1ebed6ed3628a11236b4223cf29d",
+      "id": "tests/fixtures/basic/math.js::mul#function@0",
+      "kind": "function",
+      "location": {
+        "endLine": 11,
+        "file": "tests/fixtures/basic/math.js",
+        "startLine": 9
+      },
+      "name": "mul",
+      "staleness": "unknown"
+    },
+    {
+      "body": null,
+      "bodyIncluded": false,
+      "context": "Generates the sum of two numbers",
+      "contextSource": "authored",
+      "derivedSummary": "function sum(a, b)",
+      "directives": [
+        {
+          "key": "context",
+          "location": {
+            "endLine": 1,
+            "file": "tests/fixtures/basic/math.js",
+            "startLine": 1
+          },
+          "prefix": "ai",
+          "raw": "// ai-context: Generates the sum of two numbers",
+          "status": "ok",
+          "value": "Generates the sum of two numbers"
+        },
+        {
+          "key": "body",
+          "location": {
+            "endLine": 2,
+            "file": "tests/fixtures/basic/math.js",
+            "startLine": 2
+          },
+          "prefix": "ai",
+          "raw": "// ai-body: off",
+          "status": "ok",
+          "value": "off"
+        }
+      ],
+      "fingerprint": "29559069a95634ea6e723e675b9be1ed4a59fd847ba07abfe7f9228189a50084",
+      "id": "tests/fixtures/basic/math.js::sum#function@0",
+      "kind": "function",
+      "location": {
+        "endLine": 6,
+        "file": "tests/fixtures/basic/math.js",
+        "startLine": 3
+      },
+      "name": "sum",
+      "staleness": "unknown"
+    }
+  ],
+  "schemaVersion": "1.0.0",
+  "warnings": []
+}

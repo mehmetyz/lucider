@@ -1,0 +1,37 @@
+{
+  "name": "lucider",
+  "version": "0.0.1",
+  "description": "Reads comment directives from source and produces an optimized, drift-aware AI context graph",
+  "type": "module",
+  "bin": {
+    "lucider": "dist/cli/index.js"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "start": "node dist/cli/index.js"
+  },
+  "author": "mehmet yildiz",
+  "license": "MIT",
+  "dependencies": {
+    "tree-sitter": "^0.25.1",
+    "tree-sitter-javascript": "^0.25.0",
+    "tree-sitter-typescript": "^0.23.2"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "ajv": "^8.20.0",
+    "typescript": "^5.6.0",
+    "vitest": "^2.1.0"
+  }
+}

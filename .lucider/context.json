@@ -1,0 +1,1834 @@
+{
+  "edges": [
+    {
+      "from": "src/cli/index.ts",
+      "to": "src/cli/index.ts::discover#function@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/cli/index.ts",
+      "to": "src/cli/index.ts::loadBaseline#function@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/cli/index.ts",
+      "to": "src/cli/index.ts::runCli#function@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/core/context.ts",
+      "to": "src/core/context.ts::BodyDefault#type@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/core/context.ts",
+      "to": "src/core/context.ts::ContextResult#interface@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/core/context.ts",
+      "to": "src/core/context.ts::applyContext#function@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/core/context.ts",
+      "to": "src/core/context.ts::deriveSummary#function@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/core/context.ts",
+      "to": "src/core/context.ts::lastDirectiveValue#function@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/core/graph.ts",
+      "to": "src/core/graph.ts::NeighbourSlice#interface@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/core/graph.ts",
+      "to": "src/core/graph.ts::buildContainmentEdges#function@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/core/graph.ts",
+      "to": "src/core/graph.ts::contains#function@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/core/graph.ts",
+      "to": "src/core/graph.ts::neighbourSlice#function@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/core/graph.ts",
+      "to": "src/core/graph.ts::span#function@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/core/ids.ts",
+      "to": "src/core/ids.ts::makeLocation#function@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/core/ids.ts",
+      "to": "src/core/ids.ts::makeNodeId#function@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/core/metrics.ts",
+      "to": "src/core/metrics.ts::EmittedContext#interface@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/core/metrics.ts",
+      "to": "src/core/metrics.ts::approxTokens#function@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/core/metrics.ts",
+      "to": "src/core/metrics.ts::computeMetrics#function@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/core/nodes.ts",
+      "to": "src/core/nodes.ts::BuildNodesArgs#interface@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/core/nodes.ts",
+      "to": "src/core/nodes.ts::RawNode#interface@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/core/nodes.ts",
+      "to": "src/core/nodes.ts::buildNodes#function@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/core/nodes.ts",
+      "to": "src/core/nodes.ts::detectConflicts#function@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/core/nodes.ts",
+      "to": "src/core/nodes.ts::resolveStatuses#function@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/core/pipeline.ts",
+      "to": "src/core/pipeline.ts::BuildArtifactArgs#interface@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/core/pipeline.ts",
+      "to": "src/core/pipeline.ts::SourceEntry#interface@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/core/pipeline.ts",
+      "to": "src/core/pipeline.ts::buildArtifact#function@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/core/staleness.ts",
+      "to": "src/core/staleness.ts::computeFingerprint#function@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/core/staleness.ts",
+      "to": "src/core/staleness.ts::emptyBaseline#function@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/core/staleness.ts",
+      "to": "src/core/staleness.ts::resolveStaleness#function@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/core/warnings.ts",
+      "to": "src/core/warnings.ts::WarningCollector#class@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/core/warnings.ts::WarningCollector#class@0",
+      "to": "src/core/warnings.ts::add#method@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/core/warnings.ts::WarningCollector#class@0",
+      "to": "src/core/warnings.ts::list#method@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/directives/grammar.ts",
+      "to": "src/directives/grammar.ts::extractDirectives#function@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/directives/grammar.ts",
+      "to": "src/directives/grammar.ts::stripCommentSyntax#function@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/directives/registry.ts",
+      "to": "src/directives/registry.ts::DeprecationEntry#interface@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/directives/registry.ts",
+      "to": "src/directives/registry.ts::Registry#interface@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/directives/registry.ts",
+      "to": "src/directives/registry.ts::RegistryOptions#interface@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/directives/registry.ts",
+      "to": "src/directives/registry.ts::createRegistry#function@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/output/artifact.ts",
+      "to": "src/output/artifact.ts::AssembleArgs#interface@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/output/artifact.ts",
+      "to": "src/output/artifact.ts::assembleArtifact#function@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/output/artifact.ts",
+      "to": "src/output/artifact.ts::byEdge#function@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/output/artifact.ts",
+      "to": "src/output/artifact.ts::serializeArtifact#function@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/output/artifact.ts",
+      "to": "src/output/artifact.ts::sortKeys#function@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/output/artifact.ts",
+      "to": "src/output/artifact.ts::stableStringify#function@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/output/markdown.ts",
+      "to": "src/output/markdown.ts::fenceLang#function@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/output/markdown.ts",
+      "to": "src/output/markdown.ts::renderMarkdown#function@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/output/markdown.ts",
+      "to": "src/output/markdown.ts::renderNode#function@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/parsers/adapter.ts",
+      "to": "src/parsers/adapter.ts::CommentNode#interface@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/parsers/adapter.ts",
+      "to": "src/parsers/adapter.ts::DeclNode#interface@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/parsers/adapter.ts",
+      "to": "src/parsers/adapter.ts::LanguageAdapter#interface@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/parsers/javascript.ts",
+      "to": "src/parsers/javascript.ts::JavaScriptAdapter#class@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/parsers/javascript.ts::JavaScriptAdapter#class@0",
+      "to": "src/parsers/javascript.ts::constructor#method@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/parsers/registry.ts",
+      "to": "src/parsers/registry.ts::allAdapters#function@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/parsers/registry.ts",
+      "to": "src/parsers/registry.ts::resolveAdapter#function@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/parsers/registry.ts",
+      "to": "src/parsers/registry.ts::supportedExtensions#function@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/parsers/tree-sitter-adapter.ts",
+      "to": "src/parsers/tree-sitter-adapter.ts::TSNode#type@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/parsers/tree-sitter-adapter.ts",
+      "to": "src/parsers/tree-sitter-adapter.ts::TreeSitterAdapter#class@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/parsers/tree-sitter-adapter.ts",
+      "to": "src/parsers/tree-sitter-adapter.ts::TreeSitterAdapterConfig#interface@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/parsers/tree-sitter-adapter.ts::TreeSitterAdapter#class@0",
+      "to": "src/parsers/tree-sitter-adapter.ts::constructor#method@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/parsers/tree-sitter-adapter.ts::TreeSitterAdapter#class@0",
+      "to": "src/parsers/tree-sitter-adapter.ts::parseComments#method@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/parsers/tree-sitter-adapter.ts::TreeSitterAdapter#class@0",
+      "to": "src/parsers/tree-sitter-adapter.ts::parseDeclarations#method@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/parsers/tree-sitter-adapter.ts::TreeSitterAdapter#class@0",
+      "to": "src/parsers/tree-sitter-adapter.ts::root#method@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/parsers/typescript.ts",
+      "to": "src/parsers/typescript.ts::TsxAdapter#class@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/parsers/typescript.ts",
+      "to": "src/parsers/typescript.ts::TypeScriptAdapter#class@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/parsers/typescript.ts::TsxAdapter#class@0",
+      "to": "src/parsers/typescript.ts::constructor#method@1",
+      "type": "contains"
+    },
+    {
+      "from": "src/parsers/typescript.ts::TypeScriptAdapter#class@0",
+      "to": "src/parsers/typescript.ts::constructor#method@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/types.ts",
+      "to": "src/types.ts::AnnotatedNode#interface@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/types.ts",
+      "to": "src/types.ts::Baseline#interface@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/types.ts",
+      "to": "src/types.ts::ContextArtifact#interface@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/types.ts",
+      "to": "src/types.ts::ContextSource#type@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/types.ts",
+      "to": "src/types.ts::Directive#interface@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/types.ts",
+      "to": "src/types.ts::DirectiveStatus#type@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/types.ts",
+      "to": "src/types.ts::Edge#interface@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/types.ts",
+      "to": "src/types.ts::EdgeType#type@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/types.ts",
+      "to": "src/types.ts::Location#interface@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/types.ts",
+      "to": "src/types.ts::Metrics#interface@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/types.ts",
+      "to": "src/types.ts::Staleness#type@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/types.ts",
+      "to": "src/types.ts::Warning#interface@0",
+      "type": "contains"
+    },
+    {
+      "from": "src/types.ts",
+      "to": "src/types.ts::WarningCode#type@0",
+      "type": "contains"
+    }
+  ],
+  "generatedFrom": "src",
+  "grammarVersion": "1.0.0",
+  "metrics": {
+    "emittedBytes": 33001,
+    "emittedTokens": 8374,
+    "rawBytes": 35542,
+    "rawTokens": 9125,
+    "reductionRatio": 0.08230136986301373
+  },
+  "nodes": [
+    {
+      "body": "function discover(path: string, extensions: string[]): string[] {\n  const stat = statSync(path);\n  if (stat.isFile()) return [path];\n  const out: string[] = [];\n  for (const entry of readdirSync(path, { withFileTypes: true })) {\n    if (entry.isDirectory()) {\n      if (IGNORED_DIRS.has(entry.name)) continue;\n      out.push(...discover(join(path, entry.name), extensions));\n    } else if (extensions.includes(extname(entry.name))) {\n      out.push(join(path, entry.name));\n    }\n  }\n  return out.sort();\n}",
+      "bodyIncluded": true,
+      "context": "function discover(path: string, extensions: string[]): string[]",
+      "contextSource": "derived",
+      "derivedSummary": "function discover(path: string, extensions: string[]): string[]",
+      "directives": [],
+      "fingerprint": "73b9ba12d5924562f4846ce1ebd780a7cb51f56b49f9d88994b749cae42fb1e4",
+      "id": "src/cli/index.ts::discover#function@0",
+      "kind": "function",
+      "location": {
+        "endLine": 27,
+        "file": "src/cli/index.ts",
+        "startLine": 14
+      },
+      "name": "discover",
+      "staleness": "fresh"
+    },
+    {
+      "body": "function loadBaseline(path: string): Baseline | undefined {\n  try {\n    return JSON.parse(readFileSync(path, \"utf8\")) as Baseline;\n  } catch {\n    return undefined;\n  }\n}",
+      "bodyIncluded": true,
+      "context": "function loadBaseline(path: string): Baseline | undefined",
+      "contextSource": "derived",
+      "derivedSummary": "function loadBaseline(path: string): Baseline | undefined",
+      "directives": [],
+      "fingerprint": "b9fb1e7196f201c9117e55ed50ab45730328adac0dbadb41a562d0e427e6867d",
+      "id": "src/cli/index.ts::loadBaseline#function@0",
+      "kind": "function",
+      "location": {
+        "endLine": 35,
+        "file": "src/cli/index.ts",
+        "startLine": 29
+      },
+      "name": "loadBaseline",
+      "staleness": "fresh"
+    },
+    {
+      "body": "function runCli(argv: string[]): number {\n  let parsed;\n  try {\n    parsed = parseArgs({\n      args: argv,\n      allowPositionals: true,\n      options: {\n        out: { type: \"string\" },\n        md: { type: \"string\" },\n        \"out-dir\": { type: \"string\" },\n        strict: { type: \"boolean\", default: false },\n        baseline: { type: \"string\", default: \".lucider/baseline.json\" },\n        \"update-baseline\": { type: \"boolean\", default: false },\n        \"default-body\": { type: \"string\", default: \"on\" },\n        prefix: { type: \"string\", default: \"ai\" },\n      },\n    });\n  } catch (err) {\n    process.stderr.write(`Usage error: ${(err as Error).message}\\n`);\n    return 2;\n  }\n\n  const target = parsed.positionals[0];\n  if (!target) {\n    process.stderr.write(\n      \"Usage: lucider <path> [--out-dir .lucider] [--out file.json] [--md file.md] [--strict] [--prefix ai] [--default-body on|off]\\n\",\n    );\n    return 2;\n  }\n\n  const defaultBody = parsed.values[\"default-body\"] === \"off\" ? \"off\" : \"on\";\n  const prefix = parsed.values.prefix as string;\n  const adapters = allAdapters();\n\n  let files: string[];\n  try {\n    files = discover(target, supportedExtensions(adapters));\n  } catch {\n    process.stderr.write(`Error: path not found: ${target}\\n`);\n    return 3;\n  }\n\n  const entries: SourceEntry[] = [];\n  const skipped: string[] = [];\n  for (const file of files) {\n    try {\n      entries.push({ file, source: readFileSync(file, \"utf8\") });\n    } catch {\n      skipped.push(file);\n    }\n  }\n\n  const baselinePath = parsed.values.baseline as string;\n  const baseline = loadBaseline(baselinePath);\n\n  const artifact = buildArtifact({\n    generatedFrom: target,\n    entries,\n    adapters,\n    prefix,\n    defaultBody: defaultBody as BodyDefault,\n    baseline,\n  });\n\n  for (const file of skipped) {\n    artifact.warnings.push({\n      code: \"parse_skipped\",\n      message: `Could not read file; skipped`,\n      location: { file, startLine: 1, endLine: 1 },\n    });\n  }\n\n  if (parsed.values[\"update-baseline\"]) {\n    const next = emptyBaseline();\n    for (const node of artifact.nodes) {\n      if (node.contextSource === \"authored\") next.fingerprints[node.id] = node.fingerprint;\n    }\n    mkdirSync(dirname(baselinePath), { recursive: true });\n    writeFileSync(baselinePath, JSON.stringify(next, null, 2) + \"\\n\", \"utf8\");\n    process.stderr.write(`Baseline updated: ${baselinePath}\\n`);\n    return 0;\n  }\n\n  const jsonStr = serializeArtifact(artifact);\n  const mdStr = renderMarkdown(artifact);\n  const write = (path: string, content: string): void => {\n    mkdirSync(dirname(path), { recursive: true });\n    writeFileSync(path, content, \"utf8\");\n  };\n\n  const outDir = parsed.values[\"out-dir\"] as string | undefined;\n  const outPath = parsed.values.out as string | undefined;\n  const mdPath = parsed.values.md as string | undefined;\n  let wroteFile = false;\n\n  if (outDir) {\n    write(join(outDir, \"context.json\"), jsonStr + \"\\n\");\n    write(join(outDir, \"context.md\"), mdStr + \"\\n\");\n    process.stderr.write(`Wrote ${join(outDir, \"context.json\")} and ${join(outDir, \"context.md\")}\\n`);\n    wroteFile = true;\n  }\n  if (outPath) {\n    write(outPath, jsonStr + \"\\n\");\n    wroteFile = true;\n  }\n  if (mdPath) {\n    write(mdPath, mdStr + \"\\n\");\n    wroteFile = true;\n  }\n  if (!wroteFile) {\n    process.stdout.write(jsonStr + \"\\n\");\n  }\n\n  for (const w of artifact.warnings) {\n    const loc = w.location ? `${w.location.file}:${w.location.startLine}` : \"\";\n    process.stderr.write(`[${w.code}] ${loc} ${w.message}\\n`);\n  }\n\n  const strictViolation = artifact.warnings.some(\n    (w) => w.code === \"stale_context\" || w.code === \"malformed_directive\",\n  );\n  if (parsed.values.strict && strictViolation) return 1;\n  return 0;\n}",
+      "bodyIncluded": true,
+      "context": "function runCli(argv: string[]): number",
+      "contextSource": "derived",
+      "derivedSummary": "function runCli(argv: string[]): number",
+      "directives": [],
+      "fingerprint": "34815de7038f0c30484675db048a7bd4924384ff3c5121764e0e631e6d8a4e8a",
+      "id": "src/cli/index.ts::runCli#function@0",
+      "kind": "function",
+      "location": {
+        "endLine": 160,
+        "file": "src/cli/index.ts",
+        "startLine": 37
+      },
+      "name": "runCli",
+      "staleness": "fresh"
+    },
+    {
+      "body": "type BodyDefault = \"on\" | \"off\";",
+      "bodyIncluded": true,
+      "context": "type BodyDefault = \"on\" | \"off\";",
+      "contextSource": "derived",
+      "derivedSummary": "type BodyDefault = \"on\" | \"off\";",
+      "directives": [],
+      "fingerprint": "343e624f684d081b88021a6ce7f0c56e2c394ae2eea778cf566a356183800cec",
+      "id": "src/core/context.ts::BodyDefault#type@0",
+      "kind": "type",
+      "location": {
+        "endLine": 4,
+        "file": "src/core/context.ts",
+        "startLine": 4
+      },
+      "name": "BodyDefault",
+      "staleness": "fresh"
+    },
+    {
+      "body": "interface ContextResult {\n  derivedSummary: string;\n  context: string;\n  contextSource: ContextSource;\n  bodyIncluded: boolean;\n  body: string | null;\n}",
+      "bodyIncluded": true,
+      "context": "interface ContextResult",
+      "contextSource": "derived",
+      "derivedSummary": "interface ContextResult",
+      "directives": [],
+      "fingerprint": "5804b0af7a72cc76cc2bf59ac6afc2bcf517d5f1fbb0b71146c5c0c4e773df4d",
+      "id": "src/core/context.ts::ContextResult#interface@0",
+      "kind": "interface",
+      "location": {
+        "endLine": 12,
+        "file": "src/core/context.ts",
+        "startLine": 6
+      },
+      "name": "ContextResult",
+      "staleness": "fresh"
+    },
+    {
+      "body": "function applyContext(node: RawNode, defaultBody: BodyDefault): ContextResult {\n  const derivedSummary = deriveSummary(node);\n\n  const authored = lastDirectiveValue(node, \"context\");\n  const useAuthored = authored !== undefined && authored.length > 0;\n  const context = useAuthored ? authored! : derivedSummary;\n  const contextSource: ContextSource = useAuthored ? \"authored\" : \"derived\";\n\n  const bodyDirective = lastDirectiveValue(node, \"body\");\n  const bodyIncluded =\n    bodyDirective === \"on\" ? true : bodyDirective === \"off\" ? false : defaultBody === \"on\";\n\n  return {\n    derivedSummary,\n    context,\n    contextSource,\n    bodyIncluded,\n    body: bodyIncluded ? node.text : null,\n  };\n}",
+      "bodyIncluded": true,
+      "context": "function applyContext(node: RawNode, defaultBody: BodyDefault): ContextResult",
+      "contextSource": "derived",
+      "derivedSummary": "function applyContext(node: RawNode, defaultBody: BodyDefault): ContextResult",
+      "directives": [],
+      "fingerprint": "56263727463d4b9e5b32d3a92f342ad4f3ccaa0895f464bfcb81807df71c540e",
+      "id": "src/core/context.ts::applyContext#function@0",
+      "kind": "function",
+      "location": {
+        "endLine": 57,
+        "file": "src/core/context.ts",
+        "startLine": 38
+      },
+      "name": "applyContext",
+      "staleness": "fresh"
+    },
+    {
+      "body": "function deriveSummary(node: RawNode): string {\n  const text = node.text;\n  const braceIndex = text.indexOf(\"{\");\n  const head = braceIndex === -1 ? text.split(\"\\n\")[0] ?? text : text.slice(0, braceIndex);\n  return head.replace(/\\s+/g, \" \").trim();\n}",
+      "bodyIncluded": true,
+      "context": "function deriveSummary(node: RawNode): string",
+      "contextSource": "derived",
+      "derivedSummary": "function deriveSummary(node: RawNode): string",
+      "directives": [],
+      "fingerprint": "a7f4029edb9d444f7d4f96cf1fae5a06f4e4d347c32edff82c440a087d2151ec",
+      "id": "src/core/context.ts::deriveSummary#function@0",
+      "kind": "function",
+      "location": {
+        "endLine": 24,
+        "file": "src/core/context.ts",
+        "startLine": 19
+      },
+      "name": "deriveSummary",
+      "staleness": "fresh"
+    },
+    {
+      "body": "function lastDirectiveValue(node: RawNode, key: string): string | undefined {\n  const matches = node.directives.filter(\n    (d) => d.key === key && d.status !== \"malformed\" && d.status !== \"unknown\",\n  );\n  return matches.at(-1)?.value;\n}",
+      "bodyIncluded": true,
+      "context": "function lastDirectiveValue(node: RawNode, key: string): string | undefined",
+      "contextSource": "derived",
+      "derivedSummary": "function lastDirectiveValue(node: RawNode, key: string): string | undefined",
+      "directives": [],
+      "fingerprint": "542f52f068c81978361082e5a8d432a901e8cc0e2b91c9a77445462ca303e1b1",
+      "id": "src/core/context.ts::lastDirectiveValue#function@0",
+      "kind": "function",
+      "location": {
+        "endLine": 31,
+        "file": "src/core/context.ts",
+        "startLine": 26
+      },
+      "name": "lastDirectiveValue",
+      "staleness": "fresh"
+    },
+    {
+      "body": "interface NeighbourSlice {\n  node: AnnotatedNode;\n  neighbours: AnnotatedNode[];\n}",
+      "bodyIncluded": true,
+      "context": "interface NeighbourSlice",
+      "contextSource": "derived",
+      "derivedSummary": "interface NeighbourSlice",
+      "directives": [],
+      "fingerprint": "56c74c215ca7f552b5281f445b3a0bf8fb0bb30b4dd107b9c39923874afcb0af",
+      "id": "src/core/graph.ts::NeighbourSlice#interface@0",
+      "kind": "interface",
+      "location": {
+        "endLine": 38,
+        "file": "src/core/graph.ts",
+        "startLine": 35
+      },
+      "name": "NeighbourSlice",
+      "staleness": "fresh"
+    },
+    {
+      "body": "function buildContainmentEdges(nodes: AnnotatedNode[]): Edge[] {\n  const edges: Edge[] = [];\n  for (const node of nodes) {\n    let nearest: AnnotatedNode | undefined;\n    for (const candidate of nodes) {\n      if (!contains(candidate, node)) continue;\n      if (!nearest || span(candidate) < span(nearest)) nearest = candidate;\n    }\n    const from = nearest ? nearest.id : node.location.file;\n    edges.push({ type: \"contains\", from, to: node.id });\n  }\n  return edges;\n}",
+      "bodyIncluded": true,
+      "context": "function buildContainmentEdges(nodes: AnnotatedNode[]): Edge[]",
+      "contextSource": "derived",
+      "derivedSummary": "function buildContainmentEdges(nodes: AnnotatedNode[]): Edge[]",
+      "directives": [],
+      "fingerprint": "fec9ce978b4c510847a4c095edac0f7aea9c4d5c05ecdd9e2ac7b0168150141e",
+      "id": "src/core/graph.ts::buildContainmentEdges#function@0",
+      "kind": "function",
+      "location": {
+        "endLine": 33,
+        "file": "src/core/graph.ts",
+        "startLine": 21
+      },
+      "name": "buildContainmentEdges",
+      "staleness": "fresh"
+    },
+    {
+      "body": "function contains(outer: AnnotatedNode, inner: AnnotatedNode): boolean {\n  if (outer.id === inner.id) return false;\n  if (outer.location.file !== inner.location.file) return false;\n  const enclosesLines =\n    outer.location.startLine <= inner.location.startLine &&\n    outer.location.endLine >= inner.location.endLine;\n  return enclosesLines && span(outer) > span(inner);\n}",
+      "bodyIncluded": true,
+      "context": "function contains(outer: AnnotatedNode, inner: AnnotatedNode): boolean",
+      "contextSource": "derived",
+      "derivedSummary": "function contains(outer: AnnotatedNode, inner: AnnotatedNode): boolean",
+      "directives": [],
+      "fingerprint": "67ac072c4e7a6619d3409449e7a591f4ca7ae9fe8adc142c3c448f306e351c5e",
+      "id": "src/core/graph.ts::contains#function@0",
+      "kind": "function",
+      "location": {
+        "endLine": 14,
+        "file": "src/core/graph.ts",
+        "startLine": 7
+      },
+      "name": "contains",
+      "staleness": "fresh"
+    },
+    {
+      "body": "function neighbourSlice(\n  nodes: AnnotatedNode[],\n  edges: Edge[],\n  nodeId: string,\n): NeighbourSlice | undefined {\n  const byId = new Map(nodes.map((n) => [n.id, n]));\n  const node = byId.get(nodeId);\n  if (!node) return undefined;\n\n  const neighbourIds = new Set<string>();\n  for (const edge of edges) {\n    if (edge.from === nodeId) neighbourIds.add(edge.to);\n    if (edge.to === nodeId) neighbourIds.add(edge.from);\n  }\n\n  const neighbours = [...neighbourIds]\n    .map((id) => byId.get(id))\n    .filter((n): n is AnnotatedNode => n !== undefined)\n    .sort((a, b) => (a.id < b.id ? -1 : 1));\n\n  return { node, neighbours };\n}",
+      "bodyIncluded": true,
+      "context": "function neighbourSlice( nodes: AnnotatedNode[], edges: Edge[], nodeId: string, ): NeighbourSlice | undefined",
+      "contextSource": "derived",
+      "derivedSummary": "function neighbourSlice( nodes: AnnotatedNode[], edges: Edge[], nodeId: string, ): NeighbourSlice | undefined",
+      "directives": [],
+      "fingerprint": "c601fcd48e8c9add2158a988a6b35716dbbb7c987d9a0791fd1cabde521bd546",
+      "id": "src/core/graph.ts::neighbourSlice#function@0",
+      "kind": "function",
+      "location": {
+        "endLine": 65,
+        "file": "src/core/graph.ts",
+        "startLine": 44
+      },
+      "name": "neighbourSlice",
+      "staleness": "fresh"
+    },
+    {
+      "body": "function span(node: AnnotatedNode): number {\n  return node.location.endLine - node.location.startLine;\n}",
+      "bodyIncluded": true,
+      "context": "function span(node: AnnotatedNode): number",
+      "contextSource": "derived",
+      "derivedSummary": "function span(node: AnnotatedNode): number",
+      "directives": [],
+      "fingerprint": "0c761d32caf672aba299922990ebc639536fdad74eb2af0e02b09aa540c256fa",
+      "id": "src/core/graph.ts::span#function@0",
+      "kind": "function",
+      "location": {
+        "endLine": 5,
+        "file": "src/core/graph.ts",
+        "startLine": 3
+      },
+      "name": "span",
+      "staleness": "fresh"
+    },
+    {
+      "body": "function makeLocation(\n  file: string,\n  startLine: number,\n  endLine: number,\n): Location {\n  return { file, startLine, endLine };\n}",
+      "bodyIncluded": true,
+      "context": "function makeLocation( file: string, startLine: number, endLine: number, ): Location",
+      "contextSource": "derived",
+      "derivedSummary": "function makeLocation( file: string, startLine: number, endLine: number, ): Location",
+      "directives": [],
+      "fingerprint": "95959f80dd222acc8ab90824242dd5ae8acfb313bad5c0e69a594a667fe8ebd5",
+      "id": "src/core/ids.ts::makeLocation#function@0",
+      "kind": "function",
+      "location": {
+        "endLine": 23,
+        "file": "src/core/ids.ts",
+        "startLine": 17
+      },
+      "name": "makeLocation",
+      "staleness": "fresh"
+    },
+    {
+      "body": "function makeNodeId(\n  file: string,\n  name: string,\n  kind: string,\n  index: number,\n): string {\n  return `${file}::${name}#${kind}@${index}`;\n}",
+      "bodyIncluded": true,
+      "context": "function makeNodeId( file: string, name: string, kind: string, index: number, ): string",
+      "contextSource": "derived",
+      "derivedSummary": "function makeNodeId( file: string, name: string, kind: string, index: number, ): string",
+      "directives": [],
+      "fingerprint": "d23614395b20ee1f2b30f557e7afcace0444c7076b990e4f13696180d59625f6",
+      "id": "src/core/ids.ts::makeNodeId#function@0",
+      "kind": "function",
+      "location": {
+        "endLine": 15,
+        "file": "src/core/ids.ts",
+        "startLine": 8
+      },
+      "name": "makeNodeId",
+      "staleness": "fresh"
+    },
+    {
+      "body": "interface EmittedContext {\n  context: string;\n  body: string | null;\n}",
+      "bodyIncluded": true,
+      "context": "interface EmittedContext",
+      "contextSource": "derived",
+      "derivedSummary": "interface EmittedContext",
+      "directives": [],
+      "fingerprint": "83bc635fd18e842b536c71188f37fbfb659b631001cd2c78661a9a183525cf50",
+      "id": "src/core/metrics.ts::EmittedContext#interface@0",
+      "kind": "interface",
+      "location": {
+        "endLine": 16,
+        "file": "src/core/metrics.ts",
+        "startLine": 13
+      },
+      "name": "EmittedContext",
+      "staleness": "fresh"
+    },
+    {
+      "body": "function approxTokens(text: string): number {\n  const matches = text.match(/\\w+|[^\\s\\w]/g);\n  return matches ? matches.length : 0;\n}",
+      "bodyIncluded": true,
+      "context": "function approxTokens(text: string): number",
+      "contextSource": "derived",
+      "derivedSummary": "function approxTokens(text: string): number",
+      "directives": [],
+      "fingerprint": "0599117cb24d7c4d1b49fcfe3196becca6a880eae39642f518758a46bc3f8cb9",
+      "id": "src/core/metrics.ts::approxTokens#function@0",
+      "kind": "function",
+      "location": {
+        "endLine": 11,
+        "file": "src/core/metrics.ts",
+        "startLine": 8
+      },
+      "name": "approxTokens",
+      "staleness": "fresh"
+    },
+    {
+      "body": "function computeMetrics(rawSource: string, emitted: EmittedContext[]): Metrics {\n  const rawTokens = approxTokens(rawSource);\n  const rawBytes = Buffer.byteLength(rawSource, \"utf8\");\n\n  let emittedTokens = 0;\n  let emittedBytes = 0;\n  for (const e of emitted) {\n    const chunk = e.body === null ? e.context : `${e.context}\\n${e.body}`;\n    emittedTokens += approxTokens(chunk);\n    emittedBytes += Buffer.byteLength(chunk, \"utf8\");\n  }\n\n  const reductionRatio =\n    rawTokens === 0 ? 0 : Math.max(0, Math.min(1, 1 - emittedTokens / rawTokens));\n\n  return { rawTokens, emittedTokens, reductionRatio, rawBytes, emittedBytes };\n}",
+      "bodyIncluded": true,
+      "context": "function computeMetrics(rawSource: string, emitted: EmittedContext[]): Metrics",
+      "contextSource": "derived",
+      "derivedSummary": "function computeMetrics(rawSource: string, emitted: EmittedContext[]): Metrics",
+      "directives": [],
+      "fingerprint": "a8291398cee79c5b429b0e609515fc5096b682826515807e6a90a43a0cdfba47",
+      "id": "src/core/metrics.ts::computeMetrics#function@0",
+      "kind": "function",
+      "location": {
+        "endLine": 34,
+        "file": "src/core/metrics.ts",
+        "startLine": 18
+      },
+      "name": "computeMetrics",
+      "staleness": "fresh"
+    },
+    {
+      "body": "interface BuildNodesArgs {\n  file: string;\n  source: string;\n  adapter: LanguageAdapter;\n  prefix: string;\n  registry: Registry;\n  warnings: WarningCollector;\n}",
+      "bodyIncluded": true,
+      "context": "interface BuildNodesArgs",
+      "contextSource": "derived",
+      "derivedSummary": "interface BuildNodesArgs",
+      "directives": [],
+      "fingerprint": "9f8689d4905ac6d1105e7637f0a3712c519de6deae1427906cd7503cd549dfb1",
+      "id": "src/core/nodes.ts::BuildNodesArgs#interface@0",
+      "kind": "interface",
+      "location": {
+        "endLine": 24,
+        "file": "src/core/nodes.ts",
+        "startLine": 17
+      },
+      "name": "BuildNodesArgs",
+      "staleness": "fresh"
+    },
+    {
+      "body": "interface RawNode {\n  id: string;\n  kind: string;\n  name: string;\n  location: Location;\n  text: string;\n  directives: Directive[];\n}",
+      "bodyIncluded": true,
+      "context": "interface RawNode",
+      "contextSource": "derived",
+      "derivedSummary": "interface RawNode",
+      "directives": [],
+      "fingerprint": "da195ad04b0866e245567835261970c917e751415814294f9417da1a67497597",
+      "id": "src/core/nodes.ts::RawNode#interface@0",
+      "kind": "interface",
+      "location": {
+        "endLine": 15,
+        "file": "src/core/nodes.ts",
+        "startLine": 8
+      },
+      "name": "RawNode",
+      "staleness": "fresh"
+    },
+    {
+      "body": "function buildNodes(args: BuildNodesArgs): RawNode[] {\n  const { file, source, adapter, prefix, registry, warnings } = args;\n\n  const decls = adapter\n    .parseDeclarations(source)\n    .sort((a, b) => a.startIndex - b.startIndex);\n  const comments = adapter.parseComments(source);\n\n  const commentLines = new Set<number>();\n  for (const c of comments) {\n    for (let l = c.startLine; l <= c.endLine; l++) commentLines.add(l);\n  }\n\n  const directivesByLine = new Map<number, Directive[]>();\n  const allDirectives: Directive[] = [];\n  for (const c of comments) {\n    for (const d of extractDirectives(c, prefix)) {\n      d.location.file = file;\n      allDirectives.push(d);\n      const bucket = directivesByLine.get(d.location.startLine) ?? [];\n      bucket.push(d);\n      directivesByLine.set(d.location.startLine, bucket);\n    }\n  }\n\n  const sourceLines = source.split(\"\\n\");\n  const isBlank = (line: number): boolean =>\n    (sourceLines[line - 1] ?? \"\").trim().length === 0;\n\n  const associated = new Set<Directive>();\n  const nodes: RawNode[] = [];\n  const occurrence = new Map<string, number>();\n\n  for (const decl of decls) {\n    const collected: Directive[] = [];\n    for (let line = decl.startLine - 1; line >= 1; line--) {\n      if (isBlank(line)) continue;\n      if (!commentLines.has(line)) break;\n      const onLine = directivesByLine.get(line);\n      if (onLine) collected.push(...onLine);\n    }\n    collected.reverse(); // restore top-to-bottom order\n    for (const d of collected) associated.add(d);\n\n    resolveStatuses(collected, registry, warnings);\n    detectConflicts(collected, file, decl.startLine, warnings);\n\n    if (collected.some((d) => d.key === \"ignore\")) continue;\n\n    const occKey = `${decl.name}#${decl.kind}`;\n    const index = occurrence.get(occKey) ?? 0;\n    occurrence.set(occKey, index + 1);\n\n    nodes.push({\n      id: makeNodeId(file, decl.name, decl.kind, index),\n      kind: decl.kind,\n      name: decl.name,\n      location: { file, startLine: decl.startLine, endLine: decl.endLine },\n      text: decl.text,\n      directives: collected,\n    });\n  }\n\n  for (const d of allDirectives) {\n    if (!associated.has(d)) {\n      d.status = \"orphaned\";\n      warnings.add(\n        \"orphaned_directive\",\n        `Directive ${d.prefix}-${d.key} has no following declaration`,\n        d.location,\n      );\n    }\n  }\n\n  return nodes;\n}",
+      "bodyIncluded": true,
+      "context": "function buildNodes(args: BuildNodesArgs): RawNode[]",
+      "contextSource": "derived",
+      "derivedSummary": "function buildNodes(args: BuildNodesArgs): RawNode[]",
+      "directives": [],
+      "fingerprint": "faa07e6d683a2e348646276dffdb27adaf7d5eb01883164831cc3f91b0a4775f",
+      "id": "src/core/nodes.ts::buildNodes#function@0",
+      "kind": "function",
+      "location": {
+        "endLine": 101,
+        "file": "src/core/nodes.ts",
+        "startLine": 26
+      },
+      "name": "buildNodes",
+      "staleness": "fresh"
+    },
+    {
+      "body": "function detectConflicts(\n  directives: Directive[],\n  file: string,\n  declLine: number,\n  warnings: WarningCollector,\n): void {\n  const byKey = new Map<string, Directive[]>();\n  for (const d of directives) {\n    if (d.status === \"malformed\" || d.status === \"unknown\") continue;\n    const list = byKey.get(d.key) ?? [];\n    list.push(d);\n    byKey.set(d.key, list);\n  }\n  for (const [key, list] of byKey) {\n    const values = new Set(list.map((d) => d.value));\n    if (list.length > 1 && values.size > 1) {\n      warnings.add(\n        \"conflict\",\n        `Conflicting '${key}' directives; last one wins`,\n        { file, startLine: declLine, endLine: declLine },\n      );\n    }\n  }\n}",
+      "bodyIncluded": true,
+      "context": "function detectConflicts( directives: Directive[], file: string, declLine: number, warnings: WarningCollector, ): void",
+      "contextSource": "derived",
+      "derivedSummary": "function detectConflicts( directives: Directive[], file: string, declLine: number, warnings: WarningCollector, ): void",
+      "directives": [],
+      "fingerprint": "c18fb1c20c1294c8c4b74a2dad87c9417058d91f363163afa866bf4c1d8b7bc5",
+      "id": "src/core/nodes.ts::detectConflicts#function@0",
+      "kind": "function",
+      "location": {
+        "endLine": 161,
+        "file": "src/core/nodes.ts",
+        "startLine": 138
+      },
+      "name": "detectConflicts",
+      "staleness": "fresh"
+    },
+    {
+      "body": "function resolveStatuses(\n  directives: Directive[],\n  registry: Registry,\n  warnings: WarningCollector,\n): void {\n  for (const d of directives) {\n    if (d.status === \"malformed\") {\n      warnings.add(\n        \"malformed_directive\",\n        `Directive ${d.prefix}-${d.key} has an empty value`,\n        d.location,\n      );\n      continue;\n    }\n    const deprecation = registry.deprecationOf(d.key);\n    if (deprecation) {\n      d.status = \"deprecated\";\n      warnings.add(\n        \"deprecated_key\",\n        `Directive key '${d.key}' is deprecated; use '${deprecation.replacedBy}'`,\n        d.location,\n      );\n      continue;\n    }\n    if (!registry.isKnown(d.key)) {\n      d.status = \"unknown\";\n      warnings.add(\n        \"unknown_key\",\n        `Unrecognized directive key '${d.key}'`,\n        d.location,\n      );\n    }\n  }\n}",
+      "bodyIncluded": true,
+      "context": "function resolveStatuses( directives: Directive[], registry: Registry, warnings: WarningCollector, ): void",
+      "contextSource": "derived",
+      "derivedSummary": "function resolveStatuses( directives: Directive[], registry: Registry, warnings: WarningCollector, ): void",
+      "directives": [],
+      "fingerprint": "83b3ee5af1bc3b4ac34ec5c4c0961d098e582c037a18d722e24cf1a5d6c94974",
+      "id": "src/core/nodes.ts::resolveStatuses#function@0",
+      "kind": "function",
+      "location": {
+        "endLine": 136,
+        "file": "src/core/nodes.ts",
+        "startLine": 103
+      },
+      "name": "resolveStatuses",
+      "staleness": "fresh"
+    },
+    {
+      "body": "interface BuildArtifactArgs {\n  generatedFrom: string;\n  entries: SourceEntry[];\n  /** A single adapter used for every entry. */\n  adapter?: LanguageAdapter;\n  /** Multiple adapters resolved per entry by file extension. */\n  adapters?: LanguageAdapter[];\n  prefix: string;\n  defaultBody: BodyDefault;\n  registry?: Registry;\n  baseline?: Baseline;\n}",
+      "bodyIncluded": true,
+      "context": "interface BuildArtifactArgs",
+      "contextSource": "derived",
+      "derivedSummary": "interface BuildArtifactArgs",
+      "directives": [],
+      "fingerprint": "908e180f8abd645f226e00964f942feed384aba2228dfe8cdef60c2bc411f658",
+      "id": "src/core/pipeline.ts::BuildArtifactArgs#interface@0",
+      "kind": "interface",
+      "location": {
+        "endLine": 30,
+        "file": "src/core/pipeline.ts",
+        "startLine": 19
+      },
+      "name": "BuildArtifactArgs",
+      "staleness": "fresh"
+    },
+    {
+      "body": "interface SourceEntry {\n  file: string;\n  source: string;\n}",
+      "bodyIncluded": true,
+      "context": "interface SourceEntry",
+      "contextSource": "derived",
+      "derivedSummary": "interface SourceEntry",
+      "directives": [],
+      "fingerprint": "df8def547a2a9220ec7380995e14862b467b3cdf319bd92fbf9cab73c21907b7",
+      "id": "src/core/pipeline.ts::SourceEntry#interface@0",
+      "kind": "interface",
+      "location": {
+        "endLine": 17,
+        "file": "src/core/pipeline.ts",
+        "startLine": 14
+      },
+      "name": "SourceEntry",
+      "staleness": "fresh"
+    },
+    {
+      "body": "function buildArtifact(args: BuildArtifactArgs): ContextArtifact {\n  const registry = args.registry ?? createRegistry();\n  const warnings = new WarningCollector();\n  const nodes: AnnotatedNode[] = [];\n  const emitted: EmittedContext[] = [];\n\n  const adapterList = args.adapters ?? (args.adapter ? [args.adapter] : []);\n  if (adapterList.length === 0) {\n    throw new Error(\"buildArtifact requires `adapter` or `adapters`\");\n  }\n\n  for (const entry of args.entries) {\n    const adapter =\n      resolveAdapter(entry.file, adapterList) ?? adapterList[0]!;\n    const raws = buildNodes({\n      file: entry.file,\n      source: entry.source,\n      adapter,\n      prefix: args.prefix,\n      registry,\n      warnings,\n    });\n\n    for (const raw of raws) {\n      const ctx = applyContext(raw, args.defaultBody);\n      const fingerprint = computeFingerprint(raw.text);\n      const staleness = resolveStaleness(\n        raw.id,\n        fingerprint,\n        ctx.contextSource,\n        args.baseline,\n      );\n      if (staleness === \"stale\") {\n        warnings.add(\n          \"stale_context\",\n          `Authored context for '${raw.id}' is stale; code changed since it was written`,\n          raw.location,\n        );\n      }\n\n      nodes.push({\n        id: raw.id,\n        kind: raw.kind,\n        name: raw.name,\n        location: raw.location,\n        derivedSummary: ctx.derivedSummary,\n        context: ctx.context,\n        contextSource: ctx.contextSource,\n        bodyIncluded: ctx.bodyIncluded,\n        body: ctx.body,\n        fingerprint,\n        staleness,\n        directives: raw.directives,\n      });\n      emitted.push({ context: ctx.context, body: ctx.body });\n    }\n  }\n\n  const rawSource = args.entries.map((e) => e.source).join(\"\\n\");\n  const metrics = computeMetrics(rawSource, emitted);\n  const edges: Edge[] = buildContainmentEdges(nodes);\n\n  return assembleArtifact({\n    generatedFrom: args.generatedFrom,\n    nodes,\n    edges,\n    warnings: warnings.list(),\n    metrics,\n  });\n}",
+      "bodyIncluded": true,
+      "context": "function buildArtifact(args: BuildArtifactArgs): ContextArtifact",
+      "contextSource": "derived",
+      "derivedSummary": "function buildArtifact(args: BuildArtifactArgs): ContextArtifact",
+      "directives": [],
+      "fingerprint": "0c02b0b18e330dd9141b5525e6aa3fff3ff0fac2f5c06a728de88ae9d9f2060f",
+      "id": "src/core/pipeline.ts::buildArtifact#function@0",
+      "kind": "function",
+      "location": {
+        "endLine": 101,
+        "file": "src/core/pipeline.ts",
+        "startLine": 32
+      },
+      "name": "buildArtifact",
+      "staleness": "fresh"
+    },
+    {
+      "body": "function computeFingerprint(text: string): string {\n  const normalized = text.replace(/\\s+/g, \" \").trim();\n  return createHash(\"sha256\").update(normalized).digest(\"hex\");\n}",
+      "bodyIncluded": true,
+      "context": "function computeFingerprint(text: string): string",
+      "contextSource": "derived",
+      "derivedSummary": "function computeFingerprint(text: string): string",
+      "directives": [],
+      "fingerprint": "4e2d54bca2ffa80c2fb92fb80c20d7b2cf5672ef1410a92d96eb8afc9ae55b64",
+      "id": "src/core/staleness.ts::computeFingerprint#function@0",
+      "kind": "function",
+      "location": {
+        "endLine": 13,
+        "file": "src/core/staleness.ts",
+        "startLine": 10
+      },
+      "name": "computeFingerprint",
+      "staleness": "fresh"
+    },
+    {
+      "body": "function emptyBaseline(): Baseline {\n  return { schemaVersion: SCHEMA_VERSION, fingerprints: {} };\n}",
+      "bodyIncluded": true,
+      "context": "function emptyBaseline(): Baseline",
+      "contextSource": "derived",
+      "derivedSummary": "function emptyBaseline(): Baseline",
+      "directives": [],
+      "fingerprint": "c37456d07692fae9d966fb1ce3275a7b51e738c96aa2dda52f8da57b3040daf7",
+      "id": "src/core/staleness.ts::emptyBaseline#function@0",
+      "kind": "function",
+      "location": {
+        "endLine": 34,
+        "file": "src/core/staleness.ts",
+        "startLine": 32
+      },
+      "name": "emptyBaseline",
+      "staleness": "fresh"
+    },
+    {
+      "body": "function resolveStaleness(\n  nodeId: string,\n  fingerprint: string,\n  contextSource: \"authored\" | \"derived\",\n  baseline: Baseline | undefined,\n): Staleness {\n  if (contextSource !== \"authored\") return \"fresh\";\n  if (!baseline) return \"unknown\";\n  const recorded = baseline.fingerprints[nodeId];\n  if (recorded === undefined) return \"unknown\";\n  return recorded === fingerprint ? \"fresh\" : \"stale\";\n}",
+      "bodyIncluded": true,
+      "context": "function resolveStaleness( nodeId: string, fingerprint: string, contextSource: \"authored\" | \"derived\", baseline: Baseline | undefined, ): Staleness",
+      "contextSource": "derived",
+      "derivedSummary": "function resolveStaleness( nodeId: string, fingerprint: string, contextSource: \"authored\" | \"derived\", baseline: Baseline | undefined, ): Staleness",
+      "directives": [],
+      "fingerprint": "23a63497d4e98c5f14913b0d8efb998c7ca696e2ede65b9fff8f04cdd6c03a53",
+      "id": "src/core/staleness.ts::resolveStaleness#function@0",
+      "kind": "function",
+      "location": {
+        "endLine": 30,
+        "file": "src/core/staleness.ts",
+        "startLine": 19
+      },
+      "name": "resolveStaleness",
+      "staleness": "fresh"
+    },
+    {
+      "body": "class WarningCollector {\n  private warnings: Warning[] = [];\n\n  add(code: WarningCode, message: string, location: Location | null = null): void {\n    this.warnings.push({ code, message, location });\n  }\n\n  list(): Warning[] {\n    return [...this.warnings].sort((a, b) => {\n      const fa = a.location?.file ?? \"\";\n      const fb = b.location?.file ?? \"\";\n      if (fa !== fb) return fa < fb ? -1 : 1;\n      const la = a.location?.startLine ?? 0;\n      const lb = b.location?.startLine ?? 0;\n      if (la !== lb) return la - lb;\n      return a.code < b.code ? -1 : a.code > b.code ? 1 : 0;\n    });\n  }\n}",
+      "bodyIncluded": true,
+      "context": "class WarningCollector",
+      "contextSource": "derived",
+      "derivedSummary": "class WarningCollector",
+      "directives": [],
+      "fingerprint": "89d5691d8e3492af69b5b9f62b49e877d9315eed088dfec49acb5403daaaa8df",
+      "id": "src/core/warnings.ts::WarningCollector#class@0",
+      "kind": "class",
+      "location": {
+        "endLine": 21,
+        "file": "src/core/warnings.ts",
+        "startLine": 3
+      },
+      "name": "WarningCollector",
+      "staleness": "fresh"
+    },
+    {
+      "body": "add(code: WarningCode, message: string, location: Location | null = null): void {\n    this.warnings.push({ code, message, location });\n  }",
+      "bodyIncluded": true,
+      "context": "add(code: WarningCode, message: string, location: Location | null = null): void",
+      "contextSource": "derived",
+      "derivedSummary": "add(code: WarningCode, message: string, location: Location | null = null): void",
+      "directives": [],
+      "fingerprint": "157fed42de8ab052e0cfc0e1bd34ad866acd3644f07b8a5b5e684ebd048e1f79",
+      "id": "src/core/warnings.ts::add#method@0",
+      "kind": "method",
+      "location": {
+        "endLine": 8,
+        "file": "src/core/warnings.ts",
+        "startLine": 6
+      },
+      "name": "add",
+      "staleness": "fresh"
+    },
+    {
+      "body": "list(): Warning[] {\n    return [...this.warnings].sort((a, b) => {\n      const fa = a.location?.file ?? \"\";\n      const fb = b.location?.file ?? \"\";\n      if (fa !== fb) return fa < fb ? -1 : 1;\n      const la = a.location?.startLine ?? 0;\n      const lb = b.location?.startLine ?? 0;\n      if (la !== lb) return la - lb;\n      return a.code < b.code ? -1 : a.code > b.code ? 1 : 0;\n    });\n  }",
+      "bodyIncluded": true,
+      "context": "list(): Warning[]",
+      "contextSource": "derived",
+      "derivedSummary": "list(): Warning[]",
+      "directives": [],
+      "fingerprint": "6a06224b1de9edacdec97a75224f87219c7f2013a028c7e141af2eeb2b2a6dc0",
+      "id": "src/core/warnings.ts::list#method@0",
+      "kind": "method",
+      "location": {
+        "endLine": 20,
+        "file": "src/core/warnings.ts",
+        "startLine": 10
+      },
+      "name": "list",
+      "staleness": "fresh"
+    },
+    {
+      "body": "function extractDirectives(\n  comment: CommentNode,\n  prefix: string,\n): Directive[] {\n  const directives: Directive[] = [];\n  const pattern = new RegExp(\"^\" + prefix + \"-([a-z][a-z0-9-]*):[ \\\\t]*(.*)$\");\n  const physicalLines = comment.text.split(\"\\n\");\n\n  physicalLines.forEach((rawLine, offset) => {\n    const cleaned = stripCommentSyntax(rawLine);\n    const match = pattern.exec(cleaned);\n    if (!match) return;\n    const key = match[1]!;\n    const value = (match[2] ?? \"\").trim();\n    const line = comment.startLine + offset;\n    directives.push({\n      key,\n      value,\n      prefix,\n      raw: rawLine.trim(),\n      location: { file: \"\", startLine: line, endLine: line },\n      status: value.length === 0 ? \"malformed\" : \"ok\",\n    });\n  });\n\n  return directives;\n}",
+      "bodyIncluded": true,
+      "context": "function extractDirectives( comment: CommentNode, prefix: string, ): Directive[]",
+      "contextSource": "derived",
+      "derivedSummary": "function extractDirectives( comment: CommentNode, prefix: string, ): Directive[]",
+      "directives": [],
+      "fingerprint": "acc91a3474f9a49b08fafbde9d1732cace07f44de33e617cf39f9c0dba717ec9",
+      "id": "src/directives/grammar.ts::extractDirectives#function@0",
+      "kind": "function",
+      "location": {
+        "endLine": 52,
+        "file": "src/directives/grammar.ts",
+        "startLine": 26
+      },
+      "name": "extractDirectives",
+      "staleness": "fresh"
+    },
+    {
+      "body": "function stripCommentSyntax(line: string): string {\n  let s = line.trim();\n  if (s.startsWith(\"/*\")) s = s.slice(2);\n  if (s.endsWith(\"*/\")) s = s.slice(0, -2);\n  s = s.trim();\n  if (s.startsWith(\"//\")) s = s.slice(2);\n  else if (s.startsWith(\"*\")) s = s.slice(1);\n  return s.trim();\n}",
+      "bodyIncluded": true,
+      "context": "function stripCommentSyntax(line: string): string",
+      "contextSource": "derived",
+      "derivedSummary": "function stripCommentSyntax(line: string): string",
+      "directives": [],
+      "fingerprint": "a1e87c7a47c73d0ace3955fad73bd21cb271bd31eeb0475704bd5b8630ab1c75",
+      "id": "src/directives/grammar.ts::stripCommentSyntax#function@0",
+      "kind": "function",
+      "location": {
+        "endLine": 19,
+        "file": "src/directives/grammar.ts",
+        "startLine": 11
+      },
+      "name": "stripCommentSyntax",
+      "staleness": "fresh"
+    },
+    {
+      "body": "interface DeprecationEntry {\n  key: string;\n  replacedBy: string;\n  deprecatedInGrammar: string;\n  removedInGrammar: string;\n}",
+      "bodyIncluded": true,
+      "context": "interface DeprecationEntry",
+      "contextSource": "derived",
+      "derivedSummary": "interface DeprecationEntry",
+      "directives": [],
+      "fingerprint": "0d9c90d7ff96921ad28dce8883177248fe99a0a846e425e46f9a2ffd0562f0d0",
+      "id": "src/directives/registry.ts::DeprecationEntry#interface@0",
+      "kind": "interface",
+      "location": {
+        "endLine": 6,
+        "file": "src/directives/registry.ts",
+        "startLine": 1
+      },
+      "name": "DeprecationEntry",
+      "staleness": "fresh"
+    },
+    {
+      "body": "interface Registry {\n  isKnown(key: string): boolean;\n  deprecationOf(key: string): DeprecationEntry | undefined;\n}",
+      "bodyIncluded": true,
+      "context": "interface Registry",
+      "contextSource": "derived",
+      "derivedSummary": "interface Registry",
+      "directives": [],
+      "fingerprint": "57ee00c0c5923a4ab1a9e015881178be32255a0f8b616e69ae814a8e6995ffd2",
+      "id": "src/directives/registry.ts::Registry#interface@0",
+      "kind": "interface",
+      "location": {
+        "endLine": 11,
+        "file": "src/directives/registry.ts",
+        "startLine": 8
+      },
+      "name": "Registry",
+      "staleness": "fresh"
+    },
+    {
+      "body": "interface RegistryOptions {\n  knownKeys?: string[];\n  deprecations?: DeprecationEntry[];\n}",
+      "bodyIncluded": true,
+      "context": "interface RegistryOptions",
+      "contextSource": "derived",
+      "derivedSummary": "interface RegistryOptions",
+      "directives": [],
+      "fingerprint": "bae32af9af216c7fa248df959e389f345a5f8be02bbf05894c613ab95c590bf1",
+      "id": "src/directives/registry.ts::RegistryOptions#interface@0",
+      "kind": "interface",
+      "location": {
+        "endLine": 16,
+        "file": "src/directives/registry.ts",
+        "startLine": 13
+      },
+      "name": "RegistryOptions",
+      "staleness": "fresh"
+    },
+    {
+      "body": "function createRegistry(options: RegistryOptions = {}): Registry {\n  const known = new Set(options.knownKeys ?? DEFAULT_KNOWN_KEYS);\n  const deprecations = new Map<string, DeprecationEntry>();\n  for (const dep of options.deprecations ?? []) {\n    deprecations.set(dep.key, dep);\n    known.add(dep.key);\n  }\n\n  return {\n    isKnown: (key) => known.has(key),\n    deprecationOf: (key) => deprecations.get(key),\n  };\n}",
+      "bodyIncluded": true,
+      "context": "function createRegistry(options: RegistryOptions =",
+      "contextSource": "derived",
+      "derivedSummary": "function createRegistry(options: RegistryOptions =",
+      "directives": [],
+      "fingerprint": "6a95d882c49708120cc37fa64b37e931286515bf7c6b86f4389aca30cab0cb3c",
+      "id": "src/directives/registry.ts::createRegistry#function@0",
+      "kind": "function",
+      "location": {
+        "endLine": 36,
+        "file": "src/directives/registry.ts",
+        "startLine": 24
+      },
+      "name": "createRegistry",
+      "staleness": "fresh"
+    },
+    {
+      "body": "interface AssembleArgs {\n  generatedFrom: string;\n  nodes: AnnotatedNode[];\n  edges: Edge[];\n  warnings: Warning[];\n  metrics: Metrics;\n}",
+      "bodyIncluded": true,
+      "context": "interface AssembleArgs",
+      "contextSource": "derived",
+      "derivedSummary": "interface AssembleArgs",
+      "directives": [],
+      "fingerprint": "cae6cbd58d64a17924094ce382829bf4a600c354149d7c333a84cbcedabfcb7b",
+      "id": "src/output/artifact.ts::AssembleArgs#interface@0",
+      "kind": "interface",
+      "location": {
+        "endLine": 11,
+        "file": "src/output/artifact.ts",
+        "startLine": 5
+      },
+      "name": "AssembleArgs",
+      "staleness": "fresh"
+    },
+    {
+      "body": "function assembleArtifact(args: AssembleArgs): ContextArtifact {\n  const nodes = [...args.nodes].sort((a, b) => (a.id < b.id ? -1 : a.id > b.id ? 1 : 0));\n  const edges = [...args.edges].sort(byEdge);\n  return {\n    schemaVersion: SCHEMA_VERSION,\n    grammarVersion: GRAMMAR_VERSION,\n    generatedFrom: args.generatedFrom,\n    nodes,\n    edges,\n    warnings: args.warnings,\n    metrics: args.metrics,\n  };\n}",
+      "bodyIncluded": true,
+      "context": "function assembleArtifact(args: AssembleArgs): ContextArtifact",
+      "contextSource": "derived",
+      "derivedSummary": "function assembleArtifact(args: AssembleArgs): ContextArtifact",
+      "directives": [],
+      "fingerprint": "c30fb09b34304776cfe6abebb0d86c098020be3e1c8516c93b94f0862ee010cf",
+      "id": "src/output/artifact.ts::assembleArtifact#function@0",
+      "kind": "function",
+      "location": {
+        "endLine": 25,
+        "file": "src/output/artifact.ts",
+        "startLine": 13
+      },
+      "name": "assembleArtifact",
+      "staleness": "fresh"
+    },
+    {
+      "body": "function byEdge(a: Edge, b: Edge): number {\n  if (a.type !== b.type) return a.type < b.type ? -1 : 1;\n  if (a.from !== b.from) return a.from < b.from ? -1 : 1;\n  if (a.to !== b.to) return a.to < b.to ? -1 : 1;\n  return 0;\n}",
+      "bodyIncluded": true,
+      "context": "function byEdge(a: Edge, b: Edge): number",
+      "contextSource": "derived",
+      "derivedSummary": "function byEdge(a: Edge, b: Edge): number",
+      "directives": [],
+      "fingerprint": "05f3f23cb7c2c488f4428ed5bc6ae9aa58bd7224bbf579711d438fce8f969e4c",
+      "id": "src/output/artifact.ts::byEdge#function@0",
+      "kind": "function",
+      "location": {
+        "endLine": 32,
+        "file": "src/output/artifact.ts",
+        "startLine": 27
+      },
+      "name": "byEdge",
+      "staleness": "fresh"
+    },
+    {
+      "body": "function serializeArtifact(artifact: ContextArtifact): string {\n  return stableStringify(artifact);\n}",
+      "bodyIncluded": true,
+      "context": "function serializeArtifact(artifact: ContextArtifact): string",
+      "contextSource": "derived",
+      "derivedSummary": "function serializeArtifact(artifact: ContextArtifact): string",
+      "directives": [],
+      "fingerprint": "1843425ded6ec680018f0af04933a676bfc6df4fb31b3aee47a86bfd91e3a741",
+      "id": "src/output/artifact.ts::serializeArtifact#function@0",
+      "kind": "function",
+      "location": {
+        "endLine": 56,
+        "file": "src/output/artifact.ts",
+        "startLine": 54
+      },
+      "name": "serializeArtifact",
+      "staleness": "fresh"
+    },
+    {
+      "body": "function sortKeys(value: unknown): unknown {\n  if (Array.isArray(value)) return value.map(sortKeys);\n  if (value && typeof value === \"object\") {\n    const out: Record<string, unknown> = {};\n    for (const key of Object.keys(value as Record<string, unknown>).sort()) {\n      out[key] = sortKeys((value as Record<string, unknown>)[key]);\n    }\n    return out;\n  }\n  return value;\n}",
+      "bodyIncluded": true,
+      "context": "function sortKeys(value: unknown): unknown",
+      "contextSource": "derived",
+      "derivedSummary": "function sortKeys(value: unknown): unknown",
+      "directives": [],
+      "fingerprint": "fc688c7b4245650a1970f5a9556f96e5253ead8a14b043eb94e66b0c00fd468c",
+      "id": "src/output/artifact.ts::sortKeys#function@0",
+      "kind": "function",
+      "location": {
+        "endLine": 52,
+        "file": "src/output/artifact.ts",
+        "startLine": 42
+      },
+      "name": "sortKeys",
+      "staleness": "fresh"
+    },
+    {
+      "body": "function stableStringify(value: unknown): string {\n  return JSON.stringify(sortKeys(value), null, 2);\n}",
+      "bodyIncluded": true,
+      "context": "function stableStringify(value: unknown): string",
+      "contextSource": "derived",
+      "derivedSummary": "function stableStringify(value: unknown): string",
+      "directives": [],
+      "fingerprint": "430575a39c9eb7d00f48e9c9af5878ce5405b3ccb13031b88b375f8549ea4681",
+      "id": "src/output/artifact.ts::stableStringify#function@0",
+      "kind": "function",
+      "location": {
+        "endLine": 40,
+        "file": "src/output/artifact.ts",
+        "startLine": 38
+      },
+      "name": "stableStringify",
+      "staleness": "fresh"
+    },
+    {
+      "body": "function fenceLang(file: string): string {\n  if (file.endsWith(\".ts\") || file.endsWith(\".mts\") || file.endsWith(\".cts\")) return \"ts\";\n  if (file.endsWith(\".tsx\")) return \"tsx\";\n  return \"js\";\n}",
+      "bodyIncluded": true,
+      "context": "function fenceLang(file: string): string",
+      "contextSource": "derived",
+      "derivedSummary": "function fenceLang(file: string): string",
+      "directives": [],
+      "fingerprint": "cd34de3830267059cbafdc7c79ef3c0e4a8d65f011f3e8e067bde3382812f998",
+      "id": "src/output/markdown.ts::fenceLang#function@0",
+      "kind": "function",
+      "location": {
+        "endLine": 13,
+        "file": "src/output/markdown.ts",
+        "startLine": 9
+      },
+      "name": "fenceLang",
+      "staleness": "fresh"
+    },
+    {
+      "body": "function renderMarkdown(artifact: ContextArtifact): string {\n  const pct = (artifact.metrics.reductionRatio * 100).toFixed(1);\n  const out: string[] = [];\n\n  out.push(`# Lucider Context — ${artifact.generatedFrom}`);\n  out.push(\"\");\n  out.push(\n    `Schema ${artifact.schemaVersion} · Grammar ${artifact.grammarVersion} · ` +\n      `${artifact.nodes.length} symbols · ${artifact.edges.length} edges · ` +\n      `~${pct}% token reduction (${artifact.metrics.emittedTokens}/${artifact.metrics.rawTokens}).`,\n  );\n  out.push(\"\");\n\n  const byFile = new Map<string, AnnotatedNode[]>();\n  for (const node of artifact.nodes) {\n    const list = byFile.get(node.location.file) ?? [];\n    list.push(node);\n    byFile.set(node.location.file, list);\n  }\n\n  for (const file of [...byFile.keys()].sort()) {\n    out.push(`## ${file}`);\n    out.push(\"\");\n    for (const node of byFile.get(file)!) out.push(renderNode(node));\n  }\n\n  const staleNodes = artifact.nodes.filter((n) => n.staleness === \"stale\");\n  if (staleNodes.length > 0) {\n    out.push(\"## ⚠️ Stale context\");\n    out.push(\"\");\n    for (const n of staleNodes) out.push(`- \\`${n.id}\\` — code changed since the summary was written`);\n    out.push(\"\");\n  }\n\n  if (artifact.warnings.length > 0) {\n    out.push(\"## Warnings\");\n    out.push(\"\");\n    for (const w of artifact.warnings) {\n      const loc = w.location ? `${w.location.file}:${w.location.startLine}` : \"\";\n      out.push(`- **${w.code}** ${loc} — ${w.message}`);\n    }\n    out.push(\"\");\n  }\n\n  return out.join(\"\\n\");\n}",
+      "bodyIncluded": true,
+      "context": "function renderMarkdown(artifact: ContextArtifact): string",
+      "contextSource": "derived",
+      "derivedSummary": "function renderMarkdown(artifact: ContextArtifact): string",
+      "directives": [],
+      "fingerprint": "3438dc83c5aa595960a59ef941d4d43b477f01b96d2ad1a3838258a2c76eb345",
+      "id": "src/output/markdown.ts::renderMarkdown#function@0",
+      "kind": "function",
+      "location": {
+        "endLine": 81,
+        "file": "src/output/markdown.ts",
+        "startLine": 36
+      },
+      "name": "renderMarkdown",
+      "staleness": "fresh"
+    },
+    {
+      "body": "function renderNode(node: AnnotatedNode): string {\n  const lines: string[] = [];\n  const stale = STALE_MARK[node.staleness] ?? \"\";\n  lines.push(`### ${node.name} — ${node.kind} (L${node.location.startLine})${stale}`);\n  lines.push(\"\");\n  lines.push(node.context);\n  if (node.contextSource === \"authored\") lines.push(\"\");\n  if (node.bodyIncluded && node.body !== null) {\n    lines.push(\"\");\n    lines.push(\"```\" + fenceLang(node.location.file));\n    lines.push(node.body);\n    lines.push(\"```\");\n  }\n  lines.push(\"\");\n  return lines.join(\"\\n\");\n}",
+      "bodyIncluded": true,
+      "context": "function renderNode(node: AnnotatedNode): string",
+      "contextSource": "derived",
+      "derivedSummary": "function renderNode(node: AnnotatedNode): string",
+      "directives": [],
+      "fingerprint": "dba7b9ae498166ef0b326323df6fae23cf9bf778c0d4a44c347418a3fac1c2bd",
+      "id": "src/output/markdown.ts::renderNode#function@0",
+      "kind": "function",
+      "location": {
+        "endLine": 30,
+        "file": "src/output/markdown.ts",
+        "startLine": 15
+      },
+      "name": "renderNode",
+      "staleness": "fresh"
+    },
+    {
+      "body": "interface CommentNode {\n  text: string;\n  startLine: number;\n  endLine: number;\n  startIndex: number;\n  endIndex: number;\n}",
+      "bodyIncluded": true,
+      "context": "interface CommentNode",
+      "contextSource": "derived",
+      "derivedSummary": "interface CommentNode",
+      "directives": [],
+      "fingerprint": "7787edfe2ed176a4190523ac744a83e1d55772bda7e0e9ff4891931d013c7da2",
+      "id": "src/parsers/adapter.ts::CommentNode#interface@0",
+      "kind": "interface",
+      "location": {
+        "endLine": 17,
+        "file": "src/parsers/adapter.ts",
+        "startLine": 11
+      },
+      "name": "CommentNode",
+      "staleness": "fresh"
+    },
+    {
+      "body": "interface DeclNode {\n  kind: string;\n  name: string;\n  startLine: number;\n  endLine: number;\n  startIndex: number;\n  endIndex: number;\n  text: string;\n}",
+      "bodyIncluded": true,
+      "context": "interface DeclNode",
+      "contextSource": "derived",
+      "derivedSummary": "interface DeclNode",
+      "directives": [],
+      "fingerprint": "97047db8977b4cc637f1fc93e982445afcdb0540cda916e02dc3206e114a850b",
+      "id": "src/parsers/adapter.ts::DeclNode#interface@0",
+      "kind": "interface",
+      "location": {
+        "endLine": 9,
+        "file": "src/parsers/adapter.ts",
+        "startLine": 1
+      },
+      "name": "DeclNode",
+      "staleness": "fresh"
+    },
+    {
+      "body": "interface LanguageAdapter {\n  name: string;\n  extensions: string[];\n  parseDeclarations(source: string): DeclNode[];\n  parseComments(source: string): CommentNode[];\n}",
+      "bodyIncluded": true,
+      "context": "interface LanguageAdapter",
+      "contextSource": "derived",
+      "derivedSummary": "interface LanguageAdapter",
+      "directives": [],
+      "fingerprint": "e4f868445d095fa819ae28f3ca06cca0ef4052df2292b3311d1bb672e172271a",
+      "id": "src/parsers/adapter.ts::LanguageAdapter#interface@0",
+      "kind": "interface",
+      "location": {
+        "endLine": 29,
+        "file": "src/parsers/adapter.ts",
+        "startLine": 24
+      },
+      "name": "LanguageAdapter",
+      "staleness": "fresh"
+    },
+    {
+      "body": "class JavaScriptAdapter extends TreeSitterAdapter {\n  constructor() {\n    super({\n      name: \"javascript\",\n      extensions: [\".js\", \".mjs\", \".cjs\", \".jsx\"],\n      language: JavaScript,\n      declKinds: JS_DECL_KINDS,\n    });\n  }\n}",
+      "bodyIncluded": true,
+      "context": "class JavaScriptAdapter extends TreeSitterAdapter",
+      "contextSource": "derived",
+      "derivedSummary": "class JavaScriptAdapter extends TreeSitterAdapter",
+      "directives": [],
+      "fingerprint": "49445d3a8396286ed0f145d7534838d03e7ba21a570ffde2d6ca3b5a066f5419",
+      "id": "src/parsers/javascript.ts::JavaScriptAdapter#class@0",
+      "kind": "class",
+      "location": {
+        "endLine": 20,
+        "file": "src/parsers/javascript.ts",
+        "startLine": 11
+      },
+      "name": "JavaScriptAdapter",
+      "staleness": "fresh"
+    },
+    {
+      "body": "constructor() {\n    super({\n      name: \"javascript\",\n      extensions: [\".js\", \".mjs\", \".cjs\", \".jsx\"],\n      language: JavaScript,\n      declKinds: JS_DECL_KINDS,\n    });\n  }",
+      "bodyIncluded": true,
+      "context": "constructor()",
+      "contextSource": "derived",
+      "derivedSummary": "constructor()",
+      "directives": [],
+      "fingerprint": "efb35566550166f9142fe55f73c05aff9e979d86cc24de1eb9cf0290adee76fb",
+      "id": "src/parsers/javascript.ts::constructor#method@0",
+      "kind": "method",
+      "location": {
+        "endLine": 19,
+        "file": "src/parsers/javascript.ts",
+        "startLine": 12
+      },
+      "name": "constructor",
+      "staleness": "fresh"
+    },
+    {
+      "body": "function allAdapters(): LanguageAdapter[] {\n  return [new JavaScriptAdapter(), new TypeScriptAdapter(), new TsxAdapter()];\n}",
+      "bodyIncluded": true,
+      "context": "function allAdapters(): LanguageAdapter[]",
+      "contextSource": "derived",
+      "derivedSummary": "function allAdapters(): LanguageAdapter[]",
+      "directives": [],
+      "fingerprint": "b5c06712640b9187043225fe5b3324cc2b300b1cf5df5d30dd5a545969f0c26c",
+      "id": "src/parsers/registry.ts::allAdapters#function@0",
+      "kind": "function",
+      "location": {
+        "endLine": 9,
+        "file": "src/parsers/registry.ts",
+        "startLine": 7
+      },
+      "name": "allAdapters",
+      "staleness": "fresh"
+    },
+    {
+      "body": "function resolveAdapter(\n  file: string,\n  adapters: LanguageAdapter[],\n): LanguageAdapter | undefined {\n  const ext = extname(file);\n  return adapters.find((a) => a.extensions.includes(ext));\n}",
+      "bodyIncluded": true,
+      "context": "function resolveAdapter( file: string, adapters: LanguageAdapter[], ): LanguageAdapter | undefined",
+      "contextSource": "derived",
+      "derivedSummary": "function resolveAdapter( file: string, adapters: LanguageAdapter[], ): LanguageAdapter | undefined",
+      "directives": [],
+      "fingerprint": "b5bf44a0fca661af66b7f72cebc0a583f661ff96a6bf549c33d2b7b632fcf7ad",
+      "id": "src/parsers/registry.ts::resolveAdapter#function@0",
+      "kind": "function",
+      "location": {
+        "endLine": 18,
+        "file": "src/parsers/registry.ts",
+        "startLine": 12
+      },
+      "name": "resolveAdapter",
+      "staleness": "fresh"
+    },
+    {
+      "body": "function supportedExtensions(adapters: LanguageAdapter[]): string[] {\n  return [...new Set(adapters.flatMap((a) => a.extensions))];\n}",
+      "bodyIncluded": true,
+      "context": "function supportedExtensions(adapters: LanguageAdapter[]): string[]",
+      "contextSource": "derived",
+      "derivedSummary": "function supportedExtensions(adapters: LanguageAdapter[]): string[]",
+      "directives": [],
+      "fingerprint": "941c660a918dbbd356c990f353cda1d44cf78a5b1feecdc9f10f54cbfd3abd8a",
+      "id": "src/parsers/registry.ts::supportedExtensions#function@0",
+      "kind": "function",
+      "location": {
+        "endLine": 23,
+        "file": "src/parsers/registry.ts",
+        "startLine": 21
+      },
+      "name": "supportedExtensions",
+      "staleness": "fresh"
+    },
+    {
+      "body": "type TSNode = Parser.SyntaxNode;",
+      "bodyIncluded": true,
+      "context": "type TSNode = Parser.SyntaxNode;",
+      "contextSource": "derived",
+      "derivedSummary": "type TSNode = Parser.SyntaxNode;",
+      "directives": [],
+      "fingerprint": "d4c4207ec9dd2750dce731d31d8937dbc6709710bc25933b203b7aa00bfb783f",
+      "id": "src/parsers/tree-sitter-adapter.ts::TSNode#type@0",
+      "kind": "type",
+      "location": {
+        "endLine": 4,
+        "file": "src/parsers/tree-sitter-adapter.ts",
+        "startLine": 4
+      },
+      "name": "TSNode",
+      "staleness": "fresh"
+    },
+    {
+      "body": "class TreeSitterAdapter implements LanguageAdapter {\n  readonly name: string;\n  readonly extensions: string[];\n  private readonly parser: Parser;\n  private readonly declKinds: Record<string, string>;\n\n  constructor(config: TreeSitterAdapterConfig) {\n    this.name = config.name;\n    this.extensions = config.extensions;\n    this.declKinds = config.declKinds;\n    this.parser = new Parser();\n    this.parser.setLanguage(config.language as never);\n  }\n\n  private root(source: string): TSNode {\n    return this.parser.parse(source).rootNode;\n  }\n\n  parseDeclarations(source: string): DeclNode[] {\n    const decls: DeclNode[] = [];\n    const visit = (node: TSNode): void => {\n      const kind = this.declKinds[node.type];\n      if (kind) {\n        const nameNode = node.childForFieldName(\"name\");\n        decls.push({\n          kind,\n          name: nameNode?.text ?? \"<anonymous>\",\n          startLine: node.startPosition.row + 1,\n          endLine: node.endPosition.row + 1,\n          startIndex: node.startIndex,\n          endIndex: node.endIndex,\n          text: node.text,\n        });\n      }\n      for (const child of node.namedChildren) visit(child);\n    };\n    visit(this.root(source));\n    return decls;\n  }\n\n  parseComments(source: string): CommentNode[] {\n    const comments: CommentNode[] = [];\n    const visit = (node: TSNode): void => {\n      if (node.type === \"comment\") {\n        comments.push({\n          text: node.text,\n          startLine: node.startPosition.row + 1,\n          endLine: node.endPosition.row + 1,\n          startIndex: node.startIndex,\n          endIndex: node.endIndex,\n        });\n      }\n      for (const child of node.namedChildren) visit(child);\n    };\n    visit(this.root(source));\n    return comments;\n  }\n}",
+      "bodyIncluded": true,
+      "context": "class TreeSitterAdapter implements LanguageAdapter",
+      "contextSource": "derived",
+      "derivedSummary": "class TreeSitterAdapter implements LanguageAdapter",
+      "directives": [],
+      "fingerprint": "b38bf0e1a5236c601932f8e5dfd2da47e8d0cfca4fd206d05e272f7fbd46f76f",
+      "id": "src/parsers/tree-sitter-adapter.ts::TreeSitterAdapter#class@0",
+      "kind": "class",
+      "location": {
+        "endLine": 75,
+        "file": "src/parsers/tree-sitter-adapter.ts",
+        "startLine": 18
+      },
+      "name": "TreeSitterAdapter",
+      "staleness": "fresh"
+    },
+    {
+      "body": "interface TreeSitterAdapterConfig {\n  name: string;\n  extensions: string[];\n  language: unknown;\n  declKinds: Record<string, string>;\n}",
+      "bodyIncluded": true,
+      "context": "interface TreeSitterAdapterConfig",
+      "contextSource": "derived",
+      "derivedSummary": "interface TreeSitterAdapterConfig",
+      "directives": [],
+      "fingerprint": "b54ce2953f3d5c31d408d777d757d2b469316f71313c7eba1c35d101085ba979",
+      "id": "src/parsers/tree-sitter-adapter.ts::TreeSitterAdapterConfig#interface@0",
+      "kind": "interface",
+      "location": {
+        "endLine": 11,
+        "file": "src/parsers/tree-sitter-adapter.ts",
+        "startLine": 6
+      },
+      "name": "TreeSitterAdapterConfig",
+      "staleness": "fresh"
+    },
+    {
+      "body": "constructor(config: TreeSitterAdapterConfig) {\n    this.name = config.name;\n    this.extensions = config.extensions;\n    this.declKinds = config.declKinds;\n    this.parser = new Parser();\n    this.parser.setLanguage(config.language as never);\n  }",
+      "bodyIncluded": true,
+      "context": "constructor(config: TreeSitterAdapterConfig)",
+      "contextSource": "derived",
+      "derivedSummary": "constructor(config: TreeSitterAdapterConfig)",
+      "directives": [],
+      "fingerprint": "6e4427c4bf9170845ca35afed71da9ff95487e12875a8c79ade880ebdc371dcf",
+      "id": "src/parsers/tree-sitter-adapter.ts::constructor#method@0",
+      "kind": "method",
+      "location": {
+        "endLine": 30,
+        "file": "src/parsers/tree-sitter-adapter.ts",
+        "startLine": 24
+      },
+      "name": "constructor",
+      "staleness": "fresh"
+    },
+    {
+      "body": "parseComments(source: string): CommentNode[] {\n    const comments: CommentNode[] = [];\n    const visit = (node: TSNode): void => {\n      if (node.type === \"comment\") {\n        comments.push({\n          text: node.text,\n          startLine: node.startPosition.row + 1,\n          endLine: node.endPosition.row + 1,\n          startIndex: node.startIndex,\n          endIndex: node.endIndex,\n        });\n      }\n      for (const child of node.namedChildren) visit(child);\n    };\n    visit(this.root(source));\n    return comments;\n  }",
+      "bodyIncluded": true,
+      "context": "parseComments(source: string): CommentNode[]",
+      "contextSource": "derived",
+      "derivedSummary": "parseComments(source: string): CommentNode[]",
+      "directives": [],
+      "fingerprint": "85b7e65321760d98b2e2c7a20c4b52e046bf2b245974bf347ca1b71eafe6de41",
+      "id": "src/parsers/tree-sitter-adapter.ts::parseComments#method@0",
+      "kind": "method",
+      "location": {
+        "endLine": 74,
+        "file": "src/parsers/tree-sitter-adapter.ts",
+        "startLine": 58
+      },
+      "name": "parseComments",
+      "staleness": "fresh"
+    },
+    {
+      "body": "parseDeclarations(source: string): DeclNode[] {\n    const decls: DeclNode[] = [];\n    const visit = (node: TSNode): void => {\n      const kind = this.declKinds[node.type];\n      if (kind) {\n        const nameNode = node.childForFieldName(\"name\");\n        decls.push({\n          kind,\n          name: nameNode?.text ?? \"<anonymous>\",\n          startLine: node.startPosition.row + 1,\n          endLine: node.endPosition.row + 1,\n          startIndex: node.startIndex,\n          endIndex: node.endIndex,\n          text: node.text,\n        });\n      }\n      for (const child of node.namedChildren) visit(child);\n    };\n    visit(this.root(source));\n    return decls;\n  }",
+      "bodyIncluded": true,
+      "context": "parseDeclarations(source: string): DeclNode[]",
+      "contextSource": "derived",
+      "derivedSummary": "parseDeclarations(source: string): DeclNode[]",
+      "directives": [],
+      "fingerprint": "be21dc16031bdab00552c40de19ee38e5e730ce9bf2ffdfe62daeb6d1aaeb052",
+      "id": "src/parsers/tree-sitter-adapter.ts::parseDeclarations#method@0",
+      "kind": "method",
+      "location": {
+        "endLine": 56,
+        "file": "src/parsers/tree-sitter-adapter.ts",
+        "startLine": 36
+      },
+      "name": "parseDeclarations",
+      "staleness": "fresh"
+    },
+    {
+      "body": "private root(source: string): TSNode {\n    return this.parser.parse(source).rootNode;\n  }",
+      "bodyIncluded": true,
+      "context": "private root(source: string): TSNode",
+      "contextSource": "derived",
+      "derivedSummary": "private root(source: string): TSNode",
+      "directives": [],
+      "fingerprint": "c64b54c32466ee6c8b77a2ba7a5b7e4735e3b5f431803e09de1fd5d84bf34fe5",
+      "id": "src/parsers/tree-sitter-adapter.ts::root#method@0",
+      "kind": "method",
+      "location": {
+        "endLine": 34,
+        "file": "src/parsers/tree-sitter-adapter.ts",
+        "startLine": 32
+      },
+      "name": "root",
+      "staleness": "fresh"
+    },
+    {
+      "body": "class TsxAdapter extends TreeSitterAdapter {\n  constructor() {\n    super({\n      name: \"tsx\",\n      extensions: [\".tsx\"],\n      language: TypeScriptGrammars.tsx,\n      declKinds: TS_DECL_KINDS,\n    });\n  }\n}",
+      "bodyIncluded": true,
+      "context": "class TsxAdapter extends TreeSitterAdapter",
+      "contextSource": "derived",
+      "derivedSummary": "class TsxAdapter extends TreeSitterAdapter",
+      "directives": [],
+      "fingerprint": "9048a42d67920b8c7e622ae4600446abf50cfa2cdb3c07b8c37ca3907b5d1728",
+      "id": "src/parsers/typescript.ts::TsxAdapter#class@0",
+      "kind": "class",
+      "location": {
+        "endLine": 34,
+        "file": "src/parsers/typescript.ts",
+        "startLine": 25
+      },
+      "name": "TsxAdapter",
+      "staleness": "fresh"
+    },
+    {
+      "body": "class TypeScriptAdapter extends TreeSitterAdapter {\n  constructor() {\n    super({\n      name: \"typescript\",\n      extensions: [\".ts\", \".mts\", \".cts\"],\n      language: TypeScriptGrammars.typescript,\n      declKinds: TS_DECL_KINDS,\n    });\n  }\n}",
+      "bodyIncluded": true,
+      "context": "class TypeScriptAdapter extends TreeSitterAdapter",
+      "contextSource": "derived",
+      "derivedSummary": "class TypeScriptAdapter extends TreeSitterAdapter",
+      "directives": [],
+      "fingerprint": "e1f55089832c37b0d37a51efa65fadf84b0661ce5804d29b0d48609bd61ba8fa",
+      "id": "src/parsers/typescript.ts::TypeScriptAdapter#class@0",
+      "kind": "class",
+      "location": {
+        "endLine": 23,
+        "file": "src/parsers/typescript.ts",
+        "startLine": 14
+      },
+      "name": "TypeScriptAdapter",
+      "staleness": "fresh"
+    },
+    {
+      "body": "constructor() {\n    super({\n      name: \"typescript\",\n      extensions: [\".ts\", \".mts\", \".cts\"],\n      language: TypeScriptGrammars.typescript,\n      declKinds: TS_DECL_KINDS,\n    });\n  }",
+      "bodyIncluded": true,
+      "context": "constructor()",
+      "contextSource": "derived",
+      "derivedSummary": "constructor()",
+      "directives": [],
+      "fingerprint": "87daf853ef4dd53207f21dde3ea24c10de1da0a495ff30fa087d4d9b7fc8c366",
+      "id": "src/parsers/typescript.ts::constructor#method@0",
+      "kind": "method",
+      "location": {
+        "endLine": 22,
+        "file": "src/parsers/typescript.ts",
+        "startLine": 15
+      },
+      "name": "constructor",
+      "staleness": "fresh"
+    },
+    {
+      "body": "constructor() {\n    super({\n      name: \"tsx\",\n      extensions: [\".tsx\"],\n      language: TypeScriptGrammars.tsx,\n      declKinds: TS_DECL_KINDS,\n    });\n  }",
+      "bodyIncluded": true,
+      "context": "constructor()",
+      "contextSource": "derived",
+      "derivedSummary": "constructor()",
+      "directives": [],
+      "fingerprint": "f1e73a65417d152230c854f437900f40cdd690d8e11b176121058f1bafa28fe7",
+      "id": "src/parsers/typescript.ts::constructor#method@1",
+      "kind": "method",
+      "location": {
+        "endLine": 33,
+        "file": "src/parsers/typescript.ts",
+        "startLine": 26
+      },
+      "name": "constructor",
+      "staleness": "fresh"
+    },
+    {
+      "body": "interface AnnotatedNode {\n  id: string;\n  kind: string;\n  name: string;\n  location: Location;\n  derivedSummary: string;\n  context: string;\n  contextSource: ContextSource;\n  bodyIncluded: boolean;\n  body: string | null;\n  fingerprint: string;\n  staleness: Staleness;\n  directives: Directive[];\n}",
+      "bodyIncluded": true,
+      "context": "interface AnnotatedNode",
+      "contextSource": "derived",
+      "derivedSummary": "interface AnnotatedNode",
+      "directives": [],
+      "fingerprint": "16b96ea6e2d316b2b05fd7fa39f6a6d3042b6eca6c08f24ecfa178cde9d83b37",
+      "id": "src/types.ts::AnnotatedNode#interface@0",
+      "kind": "interface",
+      "location": {
+        "endLine": 41,
+        "file": "src/types.ts",
+        "startLine": 28
+      },
+      "name": "AnnotatedNode",
+      "staleness": "fresh"
+    },
+    {
+      "body": "interface Baseline {\n  schemaVersion: string;\n  fingerprints: Record<string, string>;\n}",
+      "bodyIncluded": true,
+      "context": "interface Baseline",
+      "contextSource": "derived",
+      "derivedSummary": "interface Baseline",
+      "directives": [],
+      "fingerprint": "8604575e2302258491829acc7b433ebac27f5e6e6ccfd6e489910aab5607704e",
+      "id": "src/types.ts::Baseline#interface@0",
+      "kind": "interface",
+      "location": {
+        "endLine": 87,
+        "file": "src/types.ts",
+        "startLine": 84
+      },
+      "name": "Baseline",
+      "staleness": "fresh"
+    },
+    {
+      "body": "interface ContextArtifact {\n  schemaVersion: string;\n  grammarVersion: string;\n  generatedFrom: string;\n  nodes: AnnotatedNode[];\n  edges: Edge[];\n  warnings: Warning[];\n  metrics: Metrics;\n}",
+      "bodyIncluded": true,
+      "context": "interface ContextArtifact",
+      "contextSource": "derived",
+      "derivedSummary": "interface ContextArtifact",
+      "directives": [],
+      "fingerprint": "f22010736ff38060af33adee3ba4a77a01ed0f43e49e931faa92176371a179b1",
+      "id": "src/types.ts::ContextArtifact#interface@0",
+      "kind": "interface",
+      "location": {
+        "endLine": 82,
+        "file": "src/types.ts",
+        "startLine": 74
+      },
+      "name": "ContextArtifact",
+      "staleness": "fresh"
+    },
+    {
+      "body": "type ContextSource = \"authored\" | \"derived\";",
+      "bodyIncluded": true,
+      "context": "type ContextSource = \"authored\" | \"derived\";",
+      "contextSource": "derived",
+      "derivedSummary": "type ContextSource = \"authored\" | \"derived\";",
+      "directives": [],
+      "fingerprint": "7bd64e285fb4aced7671caa34e72f9e426f38552da43e061eb7859dfb6322a0c",
+      "id": "src/types.ts::ContextSource#type@0",
+      "kind": "type",
+      "location": {
+        "endLine": 24,
+        "file": "src/types.ts",
+        "startLine": 24
+      },
+      "name": "ContextSource",
+      "staleness": "fresh"
+    },
+    {
+      "body": "interface Directive {\n  key: string;\n  value: string;\n  prefix: string;\n  raw: string;\n  location: Location;\n  status: DirectiveStatus;\n}",
+      "bodyIncluded": true,
+      "context": "interface Directive",
+      "contextSource": "derived",
+      "derivedSummary": "interface Directive",
+      "directives": [],
+      "fingerprint": "fe25d8dfe74cd13883d598534196bb5f6781fd7500b91f8cc3c031994d020daa",
+      "id": "src/types.ts::Directive#interface@0",
+      "kind": "interface",
+      "location": {
+        "endLine": 22,
+        "file": "src/types.ts",
+        "startLine": 15
+      },
+      "name": "Directive",
+      "staleness": "fresh"
+    },
+    {
+      "body": "type DirectiveStatus =\n  | \"ok\"\n  | \"malformed\"\n  | \"orphaned\"\n  | \"conflicting\"\n  | \"unknown\"\n  | \"deprecated\";",
+      "bodyIncluded": true,
+      "context": "type DirectiveStatus =",
+      "contextSource": "derived",
+      "derivedSummary": "type DirectiveStatus =",
+      "directives": [],
+      "fingerprint": "7ff54ecdb0e448e7eb0a5b3ea4ccbf4523b57c04345330f6714938b102ebfc31",
+      "id": "src/types.ts::DirectiveStatus#type@0",
+      "kind": "type",
+      "location": {
+        "endLine": 13,
+        "file": "src/types.ts",
+        "startLine": 7
+      },
+      "name": "DirectiveStatus",
+      "staleness": "fresh"
+    },
+    {
+      "body": "interface Edge {\n  type: EdgeType;\n  from: string;\n  to: string;\n}",
+      "bodyIncluded": true,
+      "context": "interface Edge",
+      "contextSource": "derived",
+      "derivedSummary": "interface Edge",
+      "directives": [],
+      "fingerprint": "5637e94510d4183ed3cf7064a79db4236c7f799bf76e39fa872580da780aa1c3",
+      "id": "src/types.ts::Edge#interface@0",
+      "kind": "interface",
+      "location": {
+        "endLine": 49,
+        "file": "src/types.ts",
+        "startLine": 45
+      },
+      "name": "Edge",
+      "staleness": "fresh"
+    },
+    {
+      "body": "type EdgeType = \"contains\" | \"references\" | \"calls\";",
+      "bodyIncluded": true,
+      "context": "type EdgeType = \"contains\" | \"references\" | \"calls\";",
+      "contextSource": "derived",
+      "derivedSummary": "type EdgeType = \"contains\" | \"references\" | \"calls\";",
+      "directives": [],
+      "fingerprint": "25c0f96c936155b86dfa941de8e26f7127b148c18e6311bffac33d0199186530",
+      "id": "src/types.ts::EdgeType#type@0",
+      "kind": "type",
+      "location": {
+        "endLine": 43,
+        "file": "src/types.ts",
+        "startLine": 43
+      },
+      "name": "EdgeType",
+      "staleness": "fresh"
+    },
+    {
+      "body": "interface Location {\n  file: string;\n  startLine: number;\n  endLine: number;\n}",
+      "bodyIncluded": true,
+      "context": "interface Location",
+      "contextSource": "derived",
+      "derivedSummary": "interface Location",
+      "directives": [],
+      "fingerprint": "d030be6a01eb104b6ecc33f4e4743ded6909ed05cda72e57dc18cc0102f680bf",
+      "id": "src/types.ts::Location#interface@0",
+      "kind": "interface",
+      "location": {
+        "endLine": 5,
+        "file": "src/types.ts",
+        "startLine": 1
+      },
+      "name": "Location",
+      "staleness": "fresh"
+    },
+    {
+      "body": "interface Metrics {\n  rawTokens: number;\n  emittedTokens: number;\n  reductionRatio: number;\n  rawBytes: number;\n  emittedBytes: number;\n}",
+      "bodyIncluded": true,
+      "context": "interface Metrics",
+      "contextSource": "derived",
+      "derivedSummary": "interface Metrics",
+      "directives": [],
+      "fingerprint": "55014c033b34118637057dc4ef9d0c581c82953eb1e801151fb83208a29d68e1",
+      "id": "src/types.ts::Metrics#interface@0",
+      "kind": "interface",
+      "location": {
+        "endLine": 72,
+        "file": "src/types.ts",
+        "startLine": 66
+      },
+      "name": "Metrics",
+      "staleness": "fresh"
+    },
+    {
+      "body": "type Staleness = \"fresh\" | \"stale\" | \"unknown\";",
+      "bodyIncluded": true,
+      "context": "type Staleness = \"fresh\" | \"stale\" | \"unknown\";",
+      "contextSource": "derived",
+      "derivedSummary": "type Staleness = \"fresh\" | \"stale\" | \"unknown\";",
+      "directives": [],
+      "fingerprint": "ae993ee01ecabb64f1d8390eb815248f23236952cb67c12b953fbe4290c1b175",
+      "id": "src/types.ts::Staleness#type@0",
+      "kind": "type",
+      "location": {
+        "endLine": 26,
+        "file": "src/types.ts",
+        "startLine": 26
+      },
+      "name": "Staleness",
+      "staleness": "fresh"
+    },
+    {
+      "body": "interface Warning {\n  code: WarningCode;\n  message: string;\n  location: Location | null;\n}",
+      "bodyIncluded": true,
+      "context": "interface Warning",
+      "contextSource": "derived",
+      "derivedSummary": "interface Warning",
+      "directives": [],
+      "fingerprint": "a09afb7280232ae41c32b72af7d83d63330567e56535cf2f81d0673819982abf",
+      "id": "src/types.ts::Warning#interface@0",
+      "kind": "interface",
+      "location": {
+        "endLine": 64,
+        "file": "src/types.ts",
+        "startLine": 60
+      },
+      "name": "Warning",
+      "staleness": "fresh"
+    },
+    {
+      "body": "type WarningCode =\n  | \"malformed_directive\"\n  | \"orphaned_directive\"\n  | \"conflict\"\n  | \"unknown_key\"\n  | \"deprecated_key\"\n  | \"parse_skipped\"\n  | \"stale_context\";",
+      "bodyIncluded": true,
+      "context": "type WarningCode =",
+      "contextSource": "derived",
+      "derivedSummary": "type WarningCode =",
+      "directives": [],
+      "fingerprint": "2a379e98e92a511db97126576da4e091a3a97e57d79232287b1e4a18de8149cf",
+      "id": "src/types.ts::WarningCode#type@0",
+      "kind": "type",
+      "location": {
+        "endLine": 58,
+        "file": "src/types.ts",
+        "startLine": 51
+      },
+      "name": "WarningCode",
+      "staleness": "fresh"
+    }
+  ],
+  "schemaVersion": "1.0.0",
+  "warnings": []
+}
