@@ -62,6 +62,10 @@ web_modules/
 # Output of 'npm pack'
 *.tgz
 
+# Generated Lucider catalogs (never publish)
+context.json
+.lucider/
+
 # Yarn Integrity file
 .yarn-integrity
 

@@ -1,0 +1,34 @@
+# Denylist backup. The real gate is package.json "files" (allowlist).
+# If "files" is ever removed, this still keeps the tarball from shipping the repo.
+
+src
+tests
+specs
+docs
+examples
+scripts
+.github
+.cursor
+.specify
+.vscode
+.idea
+
+*.map
+*.tsbuildinfo
+*.tgz
+*.log
+.env
+.env.*
+context.json
+.lucider
+
+tsconfig.json
+vitest.config.ts
+pnpm-lock.yaml
+CONTRIBUTING.md
+SECURITY.md
+.git
+.gitignore
+.npmrc
+node_modules
+coverage
