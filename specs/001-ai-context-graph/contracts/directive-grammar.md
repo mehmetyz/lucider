@@ -1,6 +1,6 @@
 # Contract: Directive Grammar
 
-**Grammar Version**: 1.0.0
+**Grammar Version**: 1.1.0
 
 Directives are instructions embedded in source comments that Lucider reads to build context.
 This document is the authoritative grammar contract; changes here MUST bump `grammarVersion`
@@ -37,7 +37,8 @@ Directives may appear in:
 |-----|--------------|---------|
 | `context` | free text | Human-authored summary overriding the derived baseline. |
 | `body` | `on` \| `off` | Include or exclude the symbol body from emitted context. |
-| `ignore` | (no value) | Exclude this declaration from the graph/artifact entirely. |
+| `ignore` | (none) | Exclude this declaration from the graph/artifact entirely. `ai-ignore`, `ai-ignore:`, and `@ai-ignore` are all valid. |
+| `deps` | comma-separated symbol names | Explicit `depends` edges used when expanding a query chunk. |
 
 Default when `body` is unspecified: project-configured default (`--default-body`, default `on`).
 

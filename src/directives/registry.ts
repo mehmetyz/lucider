@@ -15,7 +15,7 @@ export interface RegistryOptions {
   deprecations?: DeprecationEntry[];
 }
 
-const DEFAULT_KNOWN_KEYS = ["context", "body", "ignore"];
+const DEFAULT_KNOWN_KEYS = ["context", "body", "ignore", "deps"];
 
 /**
  * The directive registry tracks recognized keys and deprecated aliases. v1

@@ -1,7 +1,7 @@
 {
   "name": "lucider",
   "version": "0.0.1",
-  "description": "Reads comment directives from source and produces an optimized, drift-aware AI context graph",
+  "description": "Comment directives in, compact AI context out — a queryable graph for Claude, Codex, and similar assistants",
   "type": "module",
   "bin": {
     "lucider": "dist/cli/index.js"
@@ -19,10 +19,38 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "start": "node dist/cli/index.js"
+    "start": "node dist/cli/index.js",
+    "prepublishOnly": "pnpm typecheck && pnpm test && pnpm build"
   },
-  "author": "mehmet yildiz",
+  "author": "Mehmet Yildiz",
   "license": "MIT",
+  "homepage": "https://mehmetyz.github.io/lucider/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mehmetyz/lucider.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mehmetyz/lucider/issues"
+  },
+  "keywords": [
+    "ai",
+    "context",
+    "cli",
+    "tree-sitter",
+    "claude",
+    "codex"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "dependencies": {
     "tree-sitter": "^0.25.1",
     "tree-sitter-javascript": "^0.25.0",

@@ -1,10 +1,13 @@
+#!/usr/bin/env node
 import { parseArgs } from "node:util";
-import { readFileSync, writeFileSync, mkdirSync, statSync, readdirSync } from "node:fs";
+import { readFileSync, writeFileSync, mkdirSync, statSync, readdirSync, realpathSync } from "node:fs";
 import { join, extname, dirname } from "node:path";
+import { pathToFileURL } from "node:url";
 import type { Baseline } from "../types.js";
 import { buildArtifact, type SourceEntry } from "../core/pipeline.js";
 import { serializeArtifact } from "../output/artifact.js";
 import { renderMarkdown } from "../output/markdown.js";
+import { queryChunk } from "../core/query.js";
 import { allAdapters, supportedExtensions } from "../parsers/registry.js";
 import { emptyBaseline } from "../core/staleness.js";
 import type { BodyDefault } from "../core/context.js";
@@ -49,6 +52,8 @@ export function runCli(argv: string[]): number {
         "update-baseline": { type: "boolean", default: false },
         "default-body": { type: "string", default: "on" },
         prefix: { type: "string", default: "ai" },
+        query: { type: "string" },
+        depth: { type: "string", default: "0" },
       },
     });
   } catch (err) {
@@ -59,12 +64,16 @@ export function runCli(argv: string[]): number {
   const target = parsed.positionals[0];
   if (!target) {
     process.stderr.write(
-      "Usage: lucider <path> [--out-dir .lucider] [--out file.json] [--md file.md] [--strict] [--prefix ai] [--default-body on|off]\n",
+      "Usage: lucider <path> [--query term] [--depth N] [--out-dir .lucider] [--out file.json] [--md file.md] [--strict] [--prefix ai] [--default-body on|off]\n",
     );
     return 2;
   }
 
   const defaultBody = parsed.values["default-body"] === "off" ? "off" : "on";
+  const query = parsed.values.query as string | undefined;
+  const depth = Number.parseInt(String(parsed.values.depth ?? "0"), 10) || 0;
+  // Live query fetches exact-point bodies even if the index would omit them.
+  const effectiveBody = query ? "on" : defaultBody;
   const prefix = parsed.values.prefix as string;
   const adapters = allAdapters();
 
@@ -94,7 +103,7 @@ export function runCli(argv: string[]): number {
     entries,
     adapters,
     prefix,
-    defaultBody: defaultBody as BodyDefault,
+    defaultBody: effectiveBody as BodyDefault,
     baseline,
   });
 
@@ -118,7 +127,9 @@ export function runCli(argv: string[]): number {
   }
 
   const jsonStr = serializeArtifact(artifact);
-  const mdStr = renderMarkdown(artifact);
+  const mdStr = query
+    ? queryChunk(artifact, { search: query, depth, includeSeedBodies: true }).markdown
+    : renderMarkdown(artifact);
   const write = (path: string, content: string): void => {
     mkdirSync(dirname(path), { recursive: true });
     writeFileSync(path, content, "utf8");
@@ -144,7 +155,7 @@ export function runCli(argv: string[]): number {
     wroteFile = true;
   }
   if (!wroteFile) {
-    process.stdout.write(jsonStr + "\n");
+    process.stdout.write((query ? mdStr : jsonStr) + "\n");
   }
 
   for (const w of artifact.warnings) {
@@ -159,7 +170,15 @@ export function runCli(argv: string[]): number {
   return 0;
 }
 
-const isMain = process.argv[1] && import.meta.url === `file://${process.argv[1]}`;
-if (isMain) {
+function isCliEntry(argv1: string | undefined): boolean {
+  if (!argv1) return false;
+  try {
+    return import.meta.url === pathToFileURL(realpathSync(argv1)).href;
+  } catch {
+    return import.meta.url === pathToFileURL(argv1).href;
+  }
+}
+
+if (isCliEntry(process.argv[1])) {
   process.exit(runCli(process.argv.slice(2)));
 }

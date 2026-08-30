@@ -1,40 +1,193 @@
 # Lucider
 
-Lucider reads lightweight **comment directives** from your source code and produces a
-compact, drift-aware **AI context graph**. Instead of feeding an AI assistant whole files,
-you feed it exact points — authored summaries plus only the code that matters — which cuts
-tokens and improves focus.
+[![npm](https://img.shields.io/npm/v/lucider.svg)](https://www.npmjs.com/package/lucider)
+[![CI](https://github.com/mehmetyz/lucider/actions/workflows/ci.yml/badge.svg)](https://github.com/mehmetyz/lucider/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-1a4a66.svg)](LICENSE)
+[![Node](https://img.shields.io/badge/node-%3E%3D18-2c6b5c.svg)](package.json)
+
+**Comment directives in, compact AI context out.** Lucider walks JavaScript and TypeScript,
+reads `ai-context` / `ai-body` / `ai-ignore` / `ai-deps` comments, and builds a drift-aware
+graph. You keep the catalog on disk and give Claude, Codex, or any assistant a **query pack** —
+not the whole tree.
+
+npm: [lucider](https://www.npmjs.com/package/lucider) ·
+Measurements: [docs/performance.md](docs/performance.md)
+
+## Example
+
+Source in [`examples/shop`](examples/shop) — `dumpDebugSecrets` is ignored and never enters the graph:
 
 ```js
-// ai-context: Generates the sum of two numbers
+// ai-context: Verifies password and returns a session token
 // ai-body: off
-function sum(a, b) {
-  return a + b;
+// ai-deps: hashPassword, issueToken
+export function login(email, password) {
+  const hash = hashPassword(password);
+  return issueToken(email, hash);
+}
+
+// ai-context: One-way hash of a password string
+export function hashPassword(password) {
+  return `sha256:${password.length}`;
+}
+
+// ai-ignore
+export function dumpDebugSecrets() {
+  return process.env.SECRET_KEY;
 }
 ```
 
-From the above, Lucider emits a node whose context is the authored summary and whose body is
-excluded (`body: null`), shrinking what the AI has to read.
+```bash
+lucider examples/shop --default-body off --out-dir .lucider
+lucider examples/shop --query login --depth 1
+```
+
+### Graph
+
+`contains` is structure (file → symbol, class → method). `depends` is what you declared with `ai-deps`.
+
+```mermaid
+flowchart LR
+  auth.js -->|contains| login
+  auth.js -->|contains| hashPassword
+  auth.js -->|contains| issueToken
+  login -->|depends| hashPassword
+  login -->|depends| issueToken
+  cart.js -->|contains| Cart
+  cart.js -->|contains| findProduct
+  Cart -->|contains| add
+  Cart -->|contains| total
+  total -->|depends| findProduct
+```
+
+`dumpDebugSecrets` is absent. Depth-1 `--query login` is the `login → hashPassword → issueToken` cut, not the Cart side.
+
+### Catalog markdown (`--default-body off`)
+
+What you **store** (50 tokens vs 295 raw on this fixture, ~83% reduction). Do not paste a large unlabeled index into the model.
+
+```markdown
+# Lucider Context — examples/shop
+
+Schema 1.0.0 · Grammar 1.1.0 · 8 symbols · 11 edges · ~83.1% token reduction (50/295).
+
+## examples/shop/auth.js
+
+### hashPassword — function (L10)
+
+One-way hash of a password string
+
+### issueToken — function (L15)
+
+Signs a short-lived session token
+
+### login — function (L4)
+
+Verifies password and returns a session token
+```
+
+### Query pack (`--query login --depth 1`)
+
+What you **give the assistant**. `login` has `ai-body: off`, so only the summary is emitted; neighbours still include bodies.
+
+````markdown
+# Lucider chunk — login
+
+3 symbol(s) · depth 1. Ask a follow-up to expand.
+
+## examples/shop/auth.js
+
+### hashPassword — function (L10)
+
+One-way hash of a password string
+
+```js
+function hashPassword(password) {
+  return `sha256:${password.length}`;
+}
+```
+
+### issueToken — function (L15)
+
+Signs a short-lived session token
+
+```js
+function issueToken(subject, secret) {
+  return `${subject}.${secret}`;
+}
+```
+
+### login — function (L4)
+
+Verifies password and returns a session token
+````
+
+### JSON artifact
+
+```json
+{
+  "schemaVersion": "1.0.0",
+  "grammarVersion": "1.1.0",
+  "generatedFrom": "examples/shop",
+  "metrics": {
+    "rawTokens": 295,
+    "emittedTokens": 50,
+    "reductionRatio": 0.8305
+  },
+  "nodes": [
+    {
+      "id": "examples/shop/auth.js::login#function@0",
+      "kind": "function",
+      "name": "login",
+      "context": "Verifies password and returns a session token",
+      "contextSource": "authored",
+      "bodyIncluded": false,
+      "staleness": "unknown"
+    }
+  ],
+  "edges": [
+    { "type": "depends", "from": "…::login#function@0", "to": "…::hashPassword#function@0" },
+    { "type": "depends", "from": "…::login#function@0", "to": "…::issueToken#function@0" },
+    { "type": "depends", "from": "…::total#method@0", "to": "…::findProduct#function@0" }
+  ]
+}
+```
 
 ## Why
 
-- **Optimized context** — emit summaries and selected bodies, not entire files.
-- **Hybrid** — Lucider auto-derives a baseline summary from the code; your `ai-context`
-  directive overrides it when you want something more precise.
-- **Drift-aware** — authored context is fingerprinted. If the code changes but the comment
-  doesn't, Lucider flags it as **stale** so out-of-date context never silently misleads the AI.
-- **Deterministic** — identical inputs produce byte-identical output (good for diffs and CI).
-- **Language-agnostic core** — parsing is pluggable via Tree-sitter. Ships with
-  **JavaScript** (`.js/.mjs/.cjs/.jsx`), **TypeScript** (`.ts/.mts/.cts`), and **TSX** (`.tsx`).
+- **Packs, not dumps** — `--query` returns the hit (and optional `ai-deps` neighbours). On
+  isolated coding tasks, quality matched a raw 150k-token dump at ~1–5k tokens. See
+  [performance](docs/performance.md).
+- **Hybrid summaries** — Lucider derives a baseline from the AST; `ai-context` overrides it
+  when you want a precise blurb.
+- **Drift-aware** — authored comments are fingerprinted. If the code moves and the comment
+  does not, the node is **stale** (`--strict` for CI).
+- **Deterministic** — identical inputs → byte-identical JSON.
+- **Pluggable parsers** — Tree-sitter. Ships with JS (`.js/.mjs/.cjs/.jsx`), TS
+  (`.ts/.mts/.cts`), and TSX (`.tsx`).
 
-## Install & build
+## Install
+
+Requires Node.js 18+. The package name on npm is [`lucider`](https://www.npmjs.com/package/lucider).
 
 ```bash
-pnpm install
-pnpm build
+npm install -g lucider
+lucider src --query login --depth 1
 ```
 
-## CLI usage
+Without a global install:
+
+```bash
+npx lucider src --query login --depth 1
+```
+
+As a library:
+
+```bash
+npm install lucider
+```
+
+## CLI
 
 ```bash
 lucider <path> [options]
@@ -42,79 +195,67 @@ lucider <path> [options]
 
 | Option | Default | Description |
 |--------|---------|-------------|
-| `--out-dir <dir>` | — | Write both `<dir>/context.json` and `<dir>/context.md`. |
-| `--out <file>` | stdout | Write the JSON artifact to a file. |
-| `--md <file>` | — | Write the Markdown context digest to a file. |
-| `--strict` | off | Exit non-zero if any stale or malformed directive is present (CI gating). |
-| `--baseline <file>` | `.lucider/baseline.json` | Sidecar used for staleness comparison. |
-| `--update-baseline` | off | Accept current fingerprints for authored nodes and write the baseline. |
-| `--default-body <on\|off>` | `on` | Body inclusion when `ai-body` is unspecified. |
-| `--prefix <name>` | `ai` | Directive prefix to recognize. |
+| `--out-dir <dir>` | — | Write `<dir>/context.json` and `<dir>/context.md`. |
+| `--out <file>` | stdout | JSON artifact. |
+| `--md <file>` | — | Markdown digest. |
+| `--query <term>` | — | Emit a short chunk for matching symbols (not the full index). |
+| `--depth <n>` | `0` | Graph hops for `--query` (`0` = hit only, `1` = hit + deps/neighbours). |
+| `--default-body <on\|off>` | `on` | Body inclusion when `ai-body` is omitted. Use `off` for a catalog. |
+| `--strict` | off | Exit `1` if any stale or malformed directive is present. |
+| `--baseline <file>` | `.lucider/baseline.json` | Sidecar for staleness. |
+| `--update-baseline` | off | Accept current fingerprints. |
+| `--prefix <name>` | `ai` | Directive prefix. |
 
-If no output flag is given, the JSON artifact is printed to stdout.
-
-Exit codes: `0` success · `1` strict violation (stale/malformed) · `2` usage error · `3` path
-not found.
+Exit codes: `0` success · `1` strict violation · `2` usage error · `3` path not found.
 
 ### Typical workflow
 
 ```bash
-# Generate JSON + Markdown context into .lucider/
-lucider src --out-dir .lucider
+# Catalog on disk — do not paste this into the model for a large unlabeled tree
+lucider src --out-dir .lucider --default-body off
 
-# Establish a staleness baseline (commit .lucider/baseline.json)
+# Pack for Claude / Codex
+lucider src --query login --depth 1 --md pack.md
+
+# Staleness baseline (commit .lucider/baseline.json)
 lucider src --update-baseline
 
-# In CI, fail the build if context drifted or directives are malformed
+# CI
 lucider src --strict
 ```
 
-## Use with Claude / Codex / other assistants
+`--default-body on` exists so a **live query** still includes bodies on the hit slice. It is
+the wrong default for “dump every symbol into chat.”
 
-The **Markdown digest** (`context.md`) is the easiest thing to feed an assistant: it groups
-each symbol by file with its summary, marks stale entries, and includes only the code bodies
-you chose to keep.
+## Directives (v1.1.0)
 
-```bash
-# Compact overview: signatures + summaries only (great as a whole-repo primer)
-lucider src --md .lucider/context.md --default-body off
-
-# Richer slice: include bodies where you opted in with `ai-body: on`
-lucider src --out-dir .lucider
-```
-
-Then either attach/paste `.lucider/context.md`, or reference it from an `AGENTS.md` /
-project instructions file so the assistant loads exact points instead of whole files. The
-JSON artifact (`context.json`) is better when a tool needs to query nodes and edges
-programmatically (e.g. pull a node plus its neighbours).
-
-## Directive grammar (v1.0.0)
-
-Form: `<prefix>-<key>: <value>` inside line (`//`) or block (`/* */`) comments. A directive
-block is the run of comment lines immediately preceding a declaration and applies to the next
-declaration.
+Form: `<prefix>-<key>: <value>` in `//` or `/* */` comments immediately above a declaration.
 
 | Key | Value | Meaning |
 |-----|-------|---------|
 | `ai-context` | free text | Authored summary; overrides the derived baseline. |
-| `ai-body` | `on` / `off` | Include or exclude the symbol body from output. |
-| `ai-ignore` | — | Exclude the declaration from the graph entirely. |
+| `ai-body` | `on` / `off` | Include or exclude the symbol body. |
+| `ai-ignore` | *(none)* | Drop the declaration from the graph. |
+| `ai-deps` | comma-separated names | Explicit edges for depth-1 expansion. |
 
-Malformed, orphaned, conflicting, unknown, and deprecated directives all produce located
-warnings — nothing is silently dropped.
+Malformed, orphaned, conflicting, unknown, and deprecated directives produce located warnings.
 
-See [`specs/001-ai-context-graph/contracts/directive-grammar.md`](specs/001-ai-context-graph/contracts/directive-grammar.md)
-for the full grammar and [`contracts/artifact.schema.json`](specs/001-ai-context-graph/contracts/artifact.schema.json)
-for the output schema.
+Grammar: [specs/001-ai-context-graph/contracts/directive-grammar.md](specs/001-ai-context-graph/contracts/directive-grammar.md) ·
+JSON schema: [specs/001-ai-context-graph/contracts/artifact.schema.json](specs/001-ai-context-graph/contracts/artifact.schema.json)
 
-## Library API
+## Library
 
 ```ts
 import { buildArtifact, JavaScriptAdapter, serializeArtifact } from "lucider";
 
 const artifact = buildArtifact({
   generatedFrom: "src",
-  entries: [{ file: "math.js", source: "// ai-context: adds\nfunction add(a,b){return a+b;}" }],
+  entries: [
+    {
+      file: "math.js",
+      source: "// ai-context: adds two numbers\nfunction add(a, b) { return a + b; }",
+    },
+  ],
   adapter: new JavaScriptAdapter(),
   prefix: "ai",
   defaultBody: "on",
@@ -123,14 +264,22 @@ const artifact = buildArtifact({
 console.log(serializeArtifact(artifact));
 ```
 
+`queryChunk(artifact, { search: "login", depth: 1 })` returns the same cut the CLI prints.
+
 ## Development
 
 ```bash
-pnpm test        # run the test suite (vitest)
-pnpm typecheck   # type-check without emitting
-pnpm build       # compile to dist/
+git clone https://github.com/mehmetyz/lucider.git
+cd lucider
+pnpm install
+pnpm test
+pnpm typecheck
+pnpm build
 ```
+
+See [CONTRIBUTING.md](CONTRIBUTING.md). Feature specs live under `specs/`.
+
 
 ## License
 
-MIT
+[MIT](LICENSE) © Mehmet Yıldız
