@@ -10,4 +10,5 @@ Please do not file public issues for undisclosed supply-chain or RCE reports.
 
 The npm tarball is only `dist/`, `README.md`, `LICENSE`, and `package.json`.
 CI runs `pnpm audit --prod` and `scripts/check-pack.mjs` before publish.
-Releases use npm provenance (`--provenance`) from GitHub Actions.
+Releases use npm provenance (`--provenance`) from GitHub Actions via Trusted Publisher
+OIDC (Node 24 / npm 11 in `.github/workflows/publish.yml`).

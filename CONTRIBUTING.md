@@ -49,6 +49,15 @@ git push origin v0.0.2
 **UI:** Releases → Draft a new release → choose tag → **Generate release notes**. Categories come from `.github/release.yml` on the default branch.
 
 npm publish uses GitHub OIDC (Trusted Publisher on `lucider`). No `NPM_TOKEN`, no `--otp`.
+The publish job runs Node 24 so the npm CLI is ≥ 11.5.1 (Node 20’s npm 10 cannot complete
+the OIDC handshake and the registry returns a misleading 404).
+
+On [npm package settings](https://www.npmjs.com/package/lucider) → **Trusted Publisher**:
+
+- Organization or user: `mehmetyz`
+- Repository: `lucider`
+- Workflow filename: `publish.yml` (filename only, including `.yml`)
+- Environment: leave empty (the workflow does not use a GitHub environment)
 
 Do not `npm publish` from a laptop with 2FA unless you pass `--otp`.
 
