@@ -36,12 +36,20 @@ belong in `docs/performance.md` and should not be invented.
 
 CI (`.github/workflows/ci.yml`) runs on every push and pull request.
 
-npm publish (`.github/workflows/publish.yml`) runs when you **publish a GitHub Release**:
+**Preferred:** push a semver tag. Title and notes are generated; npm publish follows.
+
+```bash
+git tag v0.0.2
+git push origin v0.0.2
+```
+
+1. `.github/workflows/create-release.yml` runs `gh release create --generate-notes` (no manual title/notes).
+2. `.github/workflows/publish.yml` runs on that published release.
+
+**UI:** Releases → Draft a new release → choose tag → **Generate release notes**. Categories come from `.github/release.yml` on the default branch.
 
 1. npmjs.com → Access Tokens → granular **Automation** token with read/write on `lucider`.
 2. GitHub repo → Settings → Secrets and variables → Actions → **`NPM_TOKEN`**.
-3. Releases → Draft a new release → tag `vX.Y.Z` (must be newer than the last npm version).
-4. Publish the release. The workflow tests, builds, aligns `package.json` to the tag, and publishes.
 
 Do not commit tokens. Use an automation token (no `--otp` in CI).
 
