@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://lucider.dev/schemas/context-artifact/1.0.0.json",
+  "title": "Lucider Context Artifact",
+  "type": "object",
+  "required": ["schemaVersion", "grammarVersion", "generatedFrom", "nodes", "edges", "warnings", "metrics"],
+  "additionalProperties": false,
+  "properties": {
+    "schemaVersion": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+    "grammarVersion": { "type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$" },
+    "generatedFrom": { "type": "string" },
+    "nodes": { "type": "array", "items": { "$ref": "#/$defs/annotatedNode" } },
+    "edges": { "type": "array", "items": { "$ref": "#/$defs/edge" } },
+    "warnings": { "type": "array", "items": { "$ref": "#/$defs/warning" } },
+    "metrics": { "$ref": "#/$defs/metrics" }
+  },
+  "$defs": {
+    "location": {
+      "type": "object",
+      "required": ["file", "startLine", "endLine"],
+      "additionalProperties": false,
+      "properties": {
+        "file": { "type": "string" },
+        "startLine": { "type": "integer", "minimum": 1 },
+        "endLine": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "directive": {
+      "type": "object",
+      "required": ["key", "value", "prefix", "raw", "location", "status"],
+      "additionalProperties": false,
+      "properties": {
+        "key": { "type": "string" },
+        "value": { "type": "string" },
+        "prefix": { "type": "string" },
+        "raw": { "type": "string" },
+        "location": { "$ref": "#/$defs/location" },
+        "status": { "enum": ["ok", "malformed", "orphaned", "conflicting", "unknown", "deprecated"] }
+      }
+    },
+    "annotatedNode": {
+      "type": "object",
+      "required": ["id", "kind", "name", "location", "derivedSummary", "context", "contextSource", "bodyIncluded", "body", "fingerprint", "staleness", "directives"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string" },
+        "kind": { "type": "string" },
+        "name": { "type": "string" },
+        "location": { "$ref": "#/$defs/location" },
+        "derivedSummary": { "type": "string" },
+        "context": { "type": "string", "minLength": 1 },
+        "contextSource": { "enum": ["authored", "derived"] },
+        "bodyIncluded": { "type": "boolean" },
+        "body": { "type": ["string", "null"] },
+        "fingerprint": { "type": "string" },
+        "staleness": { "enum": ["fresh", "stale", "unknown"] },
+        "directives": { "type": "array", "items": { "$ref": "#/$defs/directive" } }
+      }
+    },
+    "edge": {
+      "type": "object",
+      "required": ["type", "from", "to"],
+      "additionalProperties": false,
+      "properties": {
+        "type": { "enum": ["contains", "references", "calls"] },
+        "from": { "type": "string" },
+        "to": { "type": "string" }
+      }
+    },
+    "warning": {
+      "type": "object",
+      "required": ["code", "message", "location"],
+      "additionalProperties": false,
+      "properties": {
+        "code": { "type": "string" },
+        "message": { "type": "string" },
+        "location": { "oneOf": [{ "$ref": "#/$defs/location" }, { "type": "null" }] }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "required": ["rawTokens", "emittedTokens", "reductionRatio", "rawBytes", "emittedBytes"],
+      "additionalProperties": false,
+      "properties": {
+        "rawTokens": { "type": "integer", "minimum": 0 },
+        "emittedTokens": { "type": "integer", "minimum": 0 },
+        "reductionRatio": { "type": "number", "minimum": 0, "maximum": 1 },
+        "rawBytes": { "type": "integer", "minimum": 0 },
+        "emittedBytes": { "type": "integer", "minimum": 0 }
+      }
+    }
+  }
+}
