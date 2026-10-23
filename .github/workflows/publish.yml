@@ -26,6 +26,7 @@ jobs:
         with:
           # Trusted publishing needs npm ≥ 11.5.1 (Node 20 ships npm 10 and 404s on PUT).
           node-version: 24
+          check-latest: true
           cache: pnpm
           registry-url: https://registry.npmjs.org
       - name: Ensure npm CLI supports OIDC trusted publishing
